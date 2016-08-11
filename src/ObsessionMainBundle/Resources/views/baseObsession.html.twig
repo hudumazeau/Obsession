@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <p class="centerSansMarge">
+            <img src="{{ asset('bundles/obsessionmain/img/LogoObsession.png') }}" width="45%">
+        </p>
+        <p class="centerSansMarge">
+            <img class="barSeparation" src="{{ asset("bundles/obsessionmain/img/BarsSeparation.png") }}" width="85%"/>
+        </p>
+        <nav class="Menu">
+            <ul class="ulMenu">
+                <li class="liMenu"><a href="{{ path('index') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/ACCUEIL.png') }}" width="70%"/></a></li>
+                <li class="liMenu"><a href="{{ path('presentation') }}"><img src="{{  asset('bundles/obsessionmain/img/Menu/PRESENTATION.png') }}" width="70%"/></a></li>
+                <li class="liMenu"><a href="{{ path('photos') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/PHOTOS.png') }}" width="70%"/></a></li>
+                <li class="liMenu"><a href="{{ path('soiree') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/SOIREES.png') }}" width="70%"/></a></li>
+                <li class="liMenu"><a href="{{ path('contact') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/CONTACTS.png') }}" width="70%"/></a></li>
+            </ul>
+        </nav>
+        <p class="centerSansMarge">
+            <img class="barSeparation" src="{{ asset("bundles/obsessionmain/img/BarsSeparation.png") }}" width="85%"/>
+        </p>
+        {% block page %}{% endblock %}
+    </div>
+    {% block affiches %}{% endblock %}
+    <div class="footerrr">
+        <a href="{{ path('fos_user_security_login') }}" class="lien">© Obsession-2016</a>
+        {% if app.user != null %}
+            <a href="{{ path('fos_user_security_logout') }}" class="lien"> - Déconnexion</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('indexAdmin') }}" class="lien"> - Page Admin</a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

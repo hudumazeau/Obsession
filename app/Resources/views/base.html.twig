@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Disco Mobile Obsession{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/obsessionmain/img/favicon.png') }}" />
+    <link href="{{ asset('bundles/obsessionmain/css/generale.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('bundles/obsessionmain/css/colorbox.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('components/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery.ui.theme.css') }}" />
+    {% block css %}{% endblock %}
+    <style type="text/css">
+        @font-face {
+            font-family: 'Hero';
+            src:    url({{asset('bundles/obsessionmain/font/Hero.otf')}}) format('opentype');
+        }
+        @font-face {
+            font-family: 'Intro';
+            src:    url({{asset('bundles/obsessionmain/font/Intro.otf')}}) format('opentype');
+        }
+        @font-face {
+            font-family: 'Amplify';
+            src:    url({{asset('bundles/obsessionmain/font/amplify.otf')}}) format('opentype');
+        }
+        @font-face {
+            font-family: 'mksd';
+            src:    url({{asset('bundles/obsessionmain/font/078mksd.otf')}}) format('opentype');
+        }
+    </style>
+    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+</head>
+<body>
+{% block body %}{% endblock %}
+{% block javascripts %}
+    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <!-- Include all JavaScripts, compiled by Assetic -->
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerjquery/js/') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('components/jstree/dist/jstree.min.js') }}"></script>
+
+{% endblock %}
+</body>
+
+</html>

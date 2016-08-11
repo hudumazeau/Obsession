@@ -1,0 +1,69 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+
+    {% for moi in mois %}
+        <div class="calendrier">
+            <p class="center"><img src="{{ asset(moi.url) }}" width="80%"></p>
+            <div class="date">
+                <p class="textCalendrier"></p>
+                {% set soirees=em.findByMois(moi.id)  %}
+                {% if soirees|length == 0 %}
+                    <p class="textCalendrier">Prochainement Disponible</p>
+                {% else %}
+                    {% for soiree in soirees %}
+                        {% if soiree.isPass %}
+                            <p class="textCalendrier" style="text-decoration:line-through">{{ soiree }}</p>
+                        {% else %}
+                            <p class="textCalendrier">{{ soiree }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <br>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="modal fade" id="afficheModal" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-image: url('{{ asset('bundles/obsessionmain/img/backgroundModal.jpg') }}');background-repeat: repeat">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="titreAffiche" style="text-align: center;color:#eeeeee"></h4>
+                </div>
+                <div class="modal-body" id="contenu">
+                </div>
+                {#<div class="modal-footer">#}
+                    {#<a href="#" class="btn" id="confirmModalNo">Non</a>#}
+                    {#<a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>#}
+                {#</div>#}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block affiches %}
+    <div class="ligne">
+        <p class="affi">
+            {% for affiche in affiches %}
+                <a class="group2 affiches" href="{{ url~"/HD/"~affiche.chemin }}" title="{{ affiche.commentaire }}"><img class="affiche"  src="{{ url~"/miniature/"~affiche.chemin }}" height="100%"></a>
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            $(".affiches").on('click',function (e) {
+                e.preventDefault();
+                $('#titreAffiche')[0].innerHTML=e.target.parentElement.title;
+                var url=e.target.parentElement.href;
+                $('#contenu')[0].innerHTML='<p style="text-align:center"><img src="'+url+'" class="img-responsive" style="border:4px solid #eeeeee;margin 20px"/></p>';
+                $('#afficheModal').modal("show");
+            })
+        });
+    </script>
+    <script src="{{ asset('bundles/obsessionmain/js/affiche.js') }}"></script>
+{% endblock %}

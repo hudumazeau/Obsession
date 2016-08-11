@@ -1,0 +1,7 @@
+obsession_main:
+    resource: "@ObsessionMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

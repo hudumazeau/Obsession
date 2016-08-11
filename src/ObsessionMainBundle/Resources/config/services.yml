@@ -1,0 +1,10 @@
+services:
+#    obsession_main.example:
+#        class: ObsessionMainBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+  obsession.mail:
+    class: ObsessionMainBundle\Service\Mailer
+    calls:
+       - [setMailer,["@mailer"]]
+

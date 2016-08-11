@@ -1,0 +1,83 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <div style="margin: 0px 70px 0px 70px"  >
+        {#<iframe class="video" src="https://www.youtube.com/embed/zC0keHO5hlk" frameborder="0" allowfullscreen></iframe>#}
+        <p style="text-align: center">
+            <iframe src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=0&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </p>
+    </div>
+    <div style="width: 90%;margin: auto">
+        <p class="centerSansMarge">
+            <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
+        </p>
+        <center>
+            <div class="Dates">
+                <p style="display:inline;font-size:48px;margin:0px;font-family:Intro;letter-spacing:-6.5px;color:#cececd">PROCHAINES &nbsp DATES&nbsp&nbsp:&nbsp&nbsp&nbsp</p>
+                <p id="Date" style="display:inline;color:#f828b6;font-family:mksd;font-size:48px;letter-spacing:4px;margin:0px;padding-top:8px;"></p>
+            </div>
+        </center>
+        <p class="centerSansMarge">
+            <img class="barSeparation" style="margin-top:18px;" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
+        </p>
+        <div>
+            <div style="float:left;width:23%;">
+                <p style="margin:0px;padding:0px;font-family:Intro;font-size:46px;letter-spacing:-0.15em;color:white">&nbspRETROUVEZ</p>
+                <p style="margin-left:3px;margin-top:-42px;margin-bottom:-0.13em;padding:0px;font-family:Intro;font-size:93px;letter-spacing:-0.15em;color:#f828b6;">NOUS</p>
+            </div>
+            <div style="float:left;width:12%;">
+                <a href="https://www.facebook.com/101442619628"><img src="{{ asset('bundles/obsessionmain/img/logoFacebook.png') }}" width="55%" style="margin-top:2.2em"/></a>
+            </div>
+            <div style="float:left;width:13%;">
+                <a href="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F101442619628&amp"><img src="{{ asset('bundles/obsessionmain/img/logoFacebookJaime.png') }}" width="75%" style="margin-top:1.3em;margin-left:-0.8em"/></a>
+            </div>
+            <div class="face"  style="float:left;width:26%;margin-top:2.5%">
+                <a href="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F101442619628&amp" style="text-decoration:none""><p style="font-family:amplify;font-size:60px;color:white;font-style: italic;display:inline">Like </p></a>
+                <p style="font-family:amplify;font-size:42px;color:white;display:inline;font-style: italic;">et </p>
+                <a href="http://www.facebook.com/share.php?u=https://www.facebook.com/101442619628" style="text-decoration:none"><p style="margin:0px;padding:0px;font-family:amplify;font-size:47px;color:white;display:inline;font-style: italic;">partage!</p></a>
+            </div>
+            <div style="float:left;width:3%;">
+                <img src="{{ asset('bundles/obsessionmain/img/Separation.png') }}" width="7px" style="margin-top:0.8em;margin-left:-0.8em"/>
+            </div>
+            <div style="float:left;width:22%;">
+                <p style="margin:0px;margin-top:0.65em;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
+                <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
+            </div>
+        </div>
+        <p class="centerSansMarge" >
+            <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
+        </p>
+    </div>
+
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            var soirees=null;
+            var url="{{ path('ajax_soirees') }}";
+            var pointeur=0;
+
+            function ChangerDate(){
+                $('#Date')[0].innerHTML=soirees[pointeur];
+                pointeur=(pointeur+1)%soirees.length;
+                setTimeout(ChangerDate,2500);
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                cache: false,
+                success: function (data) {
+                    soirees=data;
+                    if(soirees.length==0){
+                        $('#Date')[0].innerHTML='Prochainement Disponible';
+                    }else{
+                        ChangerDate();
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

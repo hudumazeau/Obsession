@@ -1,0 +1,19 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <br>
+    <div style="background-color: rgba(0,0,0,0.3);width: 100%;border: 1px solid #ba0f6f">
+        <a href="{{ path('ajLieux') }}" class="btn btn-default" style="float: left;margin: 4px"><span
+                    class="glyphicon glyphicon-chevron-left"></span> Retour</a>
+        <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">Lieux</p>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-primary" value="Modifier ce lieu">
+            {{ form_end(form) }}
+        </div>
+        <br>
+    </div>
+{% endblock %}

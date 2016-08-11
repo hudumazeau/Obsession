@@ -1,0 +1,93 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <br>
+    <div style="background-color: rgba(0,0,0,0.3);width: 100%;border: 1px solid #ba0f6f">
+        <a href="{{ path('indexAdmin') }}" class="btn btn-default" style="float: left;margin: 4px"><span
+                    class="glyphicon glyphicon-chevron-left"></span> Retour</a>
+        <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">Soirées</p>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-primary" value="Ajouter cette soirée">
+            {{ form_end(form) }}
+        </div>
+        <br>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div style="padding-right: 15%;padding-left: 15%;color: #eeeeee">
+            <div id="soirees" style="text-align: start;margin-left: 10px">
+                <ul>
+                    {% for annee,mois in param %}
+                        <li data-jstree='{"icon":" glyphicon glyphicon-calendar"}'>
+                        {{ annee }}
+                            <ul>
+                                {% for moi,soirees in mois %}
+                                    <li data-jstree='{"icon":" glyphicon glyphicon-calendar"}'>
+                                        {{ lesMois[moi-1].designation }}
+                                        <ul>
+                                            {% for soiree in soirees %}
+                                                <li data-jstree='{"icon":" glyphicon glyphicon-calendar"}'>
+                                                    <div style="display: inline-block">
+                                                        <p style="float: left">{{  soiree }}</p>
+                                                        <a href="{{ path('supSoiree',{'soiree':soiree.id}) }}" style="float: left;margin-left: 20px;margin-top: 1px" class="btn btn-danger btn-xs" id="sup">Supprimer la soirée</a>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <br>
+        </div>
+
+    </div>
+    <div id="dialog-confirm" title="Confirmation de la suppression" style="display:none;"> </div>
+    {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            var href;
+
+            $("#soirees").jstree({});
+
+            $("#soirees").on('click','#sup',function (e) {
+                e.preventDefault();
+                var soiree=e.target.parentElement.children[0].innerHTML;
+                href=e.target.href;
+                $("#dialog-confirm")[0].innerHTML = "<p><span class='ui-icon ui-icon-alert' style='display: inline-block'></span>Etes-vous sûr de vouloir supprimer la soirée " + soiree + " ?</p>";
+                $("#dialog-confirm").dialog("open");
+            })
+
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                height: 160,
+                width: 500,
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    "Oui": function () {
+                        $(this).dialog("close");
+                        window.location.href = href;
+                    },
+                    "Annuler": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+        });
+
+
+    </script>
+{% endblock %}
