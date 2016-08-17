@@ -79,10 +79,10 @@ class PublicController extends Controller
             $message = \Swift_Message::newInstance()
                 ->setSubject($mail->getObjet())
                 ->setFrom($mail->getMail())
-                ->setTo('obsessionm@dmobsession.com')
+                ->setTo('obsessionm@hotmail.fr')
                 ->setBody($mail->getMessage());
-            $this->get('mailer')->send($message);
-            $this->get('session')->getFlashBag()->add('info','L\'email à été envoyé' );
+            $result=$this->get('mailer')->send($message);
+            $this->get('session')->getFlashBag()->add('info',$result);
             return $this->redirectToRoute('contact');
         }
         return $this->render("@ObsessionMain/Public/contact.html.twig",array(
