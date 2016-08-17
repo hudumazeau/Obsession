@@ -81,8 +81,8 @@ class PublicController extends Controller
                 ->setFrom($mail->getMail())
                 ->setTo('obsessionm@hotmail.fr')
                 ->setBody($mail->getMessage());
-            $result=$this->get('mailer')->send($message);
-            $this->get('session')->getFlashBag()->add('info',$result);
+            $this->get('mailer')->send($message);
+            $this->get('session')->getFlashBag()->add('info','L\'email à été envoyé' );
             return $this->redirectToRoute('contact');
         }
         return $this->render("@ObsessionMain/Public/contact.html.twig",array(
