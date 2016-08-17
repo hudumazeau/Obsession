@@ -75,7 +75,6 @@ class AdminController extends Controller
      */
     public function adminAjoutAffichesAction(Request $request){
         $lesAffiches=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Affiche')->findAll();
-        
         $affiche=new Affiche();
         $form=$this->createForm('ObsessionMainBundle\Form\AfficheType',$affiche);
         $form->handleRequest($request);
@@ -83,6 +82,7 @@ class AdminController extends Controller
             $this->copieAffiche($affiche,'bundles/obsessionmain/img/affiches');
             return $this->redirectToRoute('ajAffiche');
         }
+        $lesAffiches=array_reverse($lesAffiches);
         return $this->render('@ObsessionMain/Admin/adminAjoutAffiche.html.twig',array(
             'form'=>$form->createView(),
             'affiches'=>$lesAffiches,
