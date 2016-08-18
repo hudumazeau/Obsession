@@ -93,6 +93,17 @@ class PublicController extends Controller
 
     /**
      *
+     * @Route("/boutique", name="boutique")
+     * @Method({"GET", "POST"})
+     */
+    public function boutiqueAction(Request $request)
+    {
+        return $this->render("@ObsessionMain/Public/boutique.html.twig",array(
+        ));
+    }
+
+    /**
+     *
      * @Route("/ajax", name="ajax_soirees")
      * @Method({"GET", "POST"})
      */
