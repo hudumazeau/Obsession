@@ -4,32 +4,34 @@
     {% for mes in app.session.flashBag.get('info') %}
         <div class="alert alert-info" role="alert" style="margin: 10px">{{ mes }}</div>
     {% endfor %}
-    <div class="contact" style="padding: 15px;text-align: center;color: #eeeeee;font-family: Hero">
-            <p class="infos120">Vos coordonnées :</p>
-        {{ form_start(form) }}
+    {#<div class="contact" style="padding: 15px;text-align: center;color: #eeeeee;font-family: Hero">#}
+            {#<p class="infos120">Vos coordonnées :</p>#}
+        {#{{ form_start(form) }}#}
 
-            <div style="display: inline-block">
-                <span class="left">{{ form_label(form.nom) }}</span>
-                <span class="left leftmargin">{{ form_widget(form.nom) }}</span>
-            </div>
-            <br>
-            <div style="display: inline-block">
-                <span class="left">{{ form_label(form.mail) }}</span>
-                <span class="left leftmargin">{{ form_widget(form.mail) }}</span>
-            </div>
-            <br>
-            <div style="display: inline-block">
-                <span class="left">{{ form_label(form.objet) }}</span>
-                <span class="left leftmargin">{{ form_widget(form.objet) }}</span>
-            </div>
-            <br>
-            {{ form_widget(form) }}
-            <br>
-            <input class="btn btn-success btn-rose" type="submit" value="Envoyer"/>
-        {{ form_end(form) }}
-    </div>
+            {#<div style="display: inline-block">#}
+                {#<span class="left">{{ form_label(form.nom) }}</span>#}
+                {#<span class="left leftmargin">{{ form_widget(form.nom) }}</span>#}
+            {#</div>#}
+            {#<br>#}
+            {#<div style="display: inline-block">#}
+                {#<span class="left">{{ form_label(form.mail) }}</span>#}
+                {#<span class="left leftmargin">{{ form_widget(form.mail) }}</span>#}
+            {#</div>#}
+            {#<br>#}
+            {#<div style="display: inline-block">#}
+                {#<span class="left">{{ form_label(form.objet) }}</span>#}
+                {#<span class="left leftmargin">{{ form_widget(form.objet) }}</span>#}
+            {#</div>#}
+            {#<br>#}
+            {#{{ form_widget(form) }}#}
+            {#<br>#}
+            {#<input class="btn btn-success btn-rose" type="submit" value="Envoyer"/>#}
+        {#{{ form_end(form) }}#}
+    {#</div>#}
+    <br><br>
     <div class="ad" style="padding: 12px">
         <p class="infos120" >{{ adresse.adresse }}</p>
         <p class="infos120">{{ adresse.numero }}</p>
+        <p class="infos120">{{ adresse.mail }}</p>
     </div>
 {% endblock %}
