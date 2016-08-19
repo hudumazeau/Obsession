@@ -92,8 +92,12 @@ class AdminController extends Controller
     private function copieAffiche(Affiche $affiche){
         $urlHD=$this->container->getParameter('affiches_url').'/HD/'.$affiche->getChemin()->getClientOriginalName();
         $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$affiche->getChemin()->getClientOriginalName();
+        $urlHDSrc=$this->container->getParameter('affiches_url_src').'/HD/'.$affiche->getChemin()->getClientOriginalName();
+        $urlMiniatureSrc=$this->container->getParameter('affiches_url_src').'/miniature/'.$affiche->getChemin()->getClientOriginalName();
         $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(678)->save($urlHD);
+        $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(678)->save($urlHDSrc);
         $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(200)->save($urlMiniature);
+        $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(200)->save($urlMiniatureSrc);
         $em=$this->getDoctrine()->getManager();
         $affiche->setChemin($affiche->getChemin()->getClientOriginalName());
         $em->persist($affiche);
@@ -172,7 +176,11 @@ class AdminController extends Controller
     private function suppressionAffiche(Affiche $affiche){
         $urlHD=$this->container->getParameter('affiches_url').'/HD/'.$affiche->getChemin();
         $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$affiche->getChemin();
+        $urlHDSrc=$this->container->getParameter('affiches_url_src').'/HD/'.$affiche->getChemin()->getClientOriginalName();
+        $urlMiniatureSrc=$this->container->getParameter('affiches_url_src').'/miniature/'.$affiche->getChemin()->getClientOriginalName();
         unlink($urlHD);
         unlink($urlMiniature);
+        unlink($urlHDSrc);
+        unlink($urlMiniatureSrc);
     }
 }
