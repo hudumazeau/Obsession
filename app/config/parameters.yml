@@ -12,4 +12,3 @@ parameters:
     mailer_password:
     secret: 9d7f6f714ca69c9b47b8a97dd76df2d36c88c691
     affiches_url: bundles/obsessionmain/img/affiches
-    affiches_url_src: ../src/ObsessionMainBundle/Resources/public/img/affiches

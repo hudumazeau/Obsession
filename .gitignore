@@ -6,3 +6,4 @@
 composer.phar
 /web/bundles/
 /bin/
+/app/config/parameters.yml
