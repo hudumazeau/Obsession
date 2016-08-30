@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 nbAffichesWeb=$(ls Obsession/web/bundles/obsessionmain/img/affiches/HD/ | wc -l)
