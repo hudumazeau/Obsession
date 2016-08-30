@@ -5,5 +5,5 @@
 /app/bootstrap*
 composer.phar
 /web/bundles/
-/app/config/parameters.yml
 /bin/
+/app/config/parameters.yml

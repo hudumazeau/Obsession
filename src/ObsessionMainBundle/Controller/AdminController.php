@@ -90,12 +90,20 @@ class AdminController extends Controller
     }
 
     private function copieAffiche(Affiche $affiche){
-        $urlHD=$this->container->getParameter('affiches_url').'/HD/'.$affiche->getChemin()->getClientOriginalName();
-        $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$affiche->getChemin()->getClientOriginalName();
+        $format=explode(".",$affiche->getChemin()->getClientOriginalName())[1];
+        $com=explode(" ",$affiche->getCommentaire());
+        $nom='';
+        foreach ($com as $comm){
+            $nom=$nom.$comm."_";
+        }
+        $nom=substr($nom, 0, -1);
+        $nom=$nom.'.'.$format;
+        $urlHD=$this->container->getParameter('affiches_url').'/HD/'.$nom;
+        $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$nom;
         $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(678)->save($urlHD);
         $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(200)->save($urlMiniature);
         $em=$this->getDoctrine()->getManager();
-        $affiche->setChemin($affiche->getChemin()->getClientOriginalName());
+        $affiche->setChemin($nom);
         $em->persist($affiche);
         $em->flush();
     }
