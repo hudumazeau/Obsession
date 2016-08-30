@@ -1,3 +1,5 @@
+#!/usr/local/bin/php
+
 <?php
 /**
  * Created by PhpStorm.
