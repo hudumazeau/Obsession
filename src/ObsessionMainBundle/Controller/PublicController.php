@@ -2,6 +2,7 @@
 
 namespace ObsessionMainBundle\Controller;
 
+use ObsessionMainBundle\Entity\Galerie;
 use ObsessionMainBundle\Entity\Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -49,8 +50,9 @@ class PublicController extends Controller
      */
     public function photosAction()
     {
+        $galeries=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Galerie')->findAll();
         return $this->render('ObsessionMainBundle:Public:photos.html.twig', array(
-            // ...
+            'galeries'=>$galeries
         ));
     }
     /**
@@ -61,6 +63,17 @@ class PublicController extends Controller
     {
         return $this->render('ObsessionMainBundle:Public:presentation.html.twig', array(
             // ...
+        ));
+    }
+
+    /**
+     * @Route("/galerie/{galerie}",name="galerie")
+     * @Method({"GET", "POST"})
+     */
+    public function galerieAction(Galerie $galerie)
+    {
+        return $this->render('ObsessionMainBundle:Public:gallerie.html.twig', array(
+            "galerie"=>$galerie
         ));
     }
 
@@ -115,6 +128,24 @@ class PublicController extends Controller
             $text[]=$soiree->getLieu()->getVille().' - '.$soiree->getDate()->format('d').' '.$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Mois')->findOneBy(array('id'=>$soiree->getDate()->format('m')))->getDesignation();
         }
         return new JsonResponse($text);
+    }
+    /**
+     *
+     * @Route("/ajaxGalerie/{galerie}", name="ajax_galerie")
+     * @Method({"GET", "POST"})
+     */
+    public function ajaxGalerieAction(Galerie $galerie)
+    {
+        $tab = array();
+        foreach ($galerie->getPhotos() as $photo){
+            $image=array();
+            $image["lowsrc"]="/bundles/obsessionmain/img/photosGalerie/miniature/".$photo->getChemin();
+            $image["fullsrc"]="/bundles/obsessionmain/img/photosGalerie/HD/".$photo->getChemin();
+            $image["description"]="";
+            $image["category"]="";
+            $tab[]=$image;
+        }
+        return new JsonResponse($tab);
     }
 
 

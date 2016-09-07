@@ -67,28 +67,4 @@ class Photo
     {
         return $this->chemin;
     }
-
-    /**
-     * Set galerie
-     *
-     * @param \ObsessionMainBundle\Entity\Galerie $galerie
-     *
-     * @return Photo
-     */
-    public function setGalerie(\ObsessionMainBundle\Entity\Galerie $galerie = null)
-    {
-        $this->galerie = $galerie;
-
-        return $this;
-    }
-
-    /**
-     * Get galerie
-     *
-     * @return \ObsessionMainBundle\Entity\Galerie
-     */
-    public function getGalerie()
-    {
-        return $this->galerie;
-    }
 }

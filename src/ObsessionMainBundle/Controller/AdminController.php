@@ -4,6 +4,8 @@ namespace ObsessionMainBundle\Controller;
 
 use ObsessionMainBundle\Business\Utils;
 use ObsessionMainBundle\Entity\Affiche;
+use ObsessionMainBundle\Entity\Galerie;
+use ObsessionMainBundle\Entity\Photo;
 use ObsessionMainBundle\Entity\Soiree;
 use ObsessionMainBundle\Entity\Lieu;
 use Symfony\Bundle\AsseticBundle\Command\AbstractCommand;
@@ -89,6 +91,51 @@ class AdminController extends Controller
         ));
     }
 
+    /**
+     * @Route("/galeries",name="adminGalerie")
+     * @Method({"GET", "POST"})
+     */
+    public function adminGalerieAction(Request $request){
+        $lesGaleries=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Galerie')->findAll();
+        $galerie=new Galerie();
+        $form=$this->createForm('ObsessionMainBundle\Form\GalerieType',$galerie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $this->copieCouvertureGalerie($galerie);
+            $this->copiePhotosGalerie($galerie,$_FILES['file']['tmp_name']);
+            return $this->redirectToRoute('adminGalerie');
+        }
+        $lesGaleries=array_reverse($lesGaleries);
+        return $this->render('@ObsessionMain/Admin/adminGaleries.html.twig',array(
+            'galeries'=>$lesGaleries,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/galerieSup/{galerie}",name="supGalerie")
+     * @Method({"GET", "POST"})
+     */
+    public function adminSuppressionGalerieAction(Request $request,Galerie $galerie){
+
+
+        $urlHD="bundles/obsessionmain/img/photosGalerie/HD/";
+        $urlMiniature="bundles/obsessionmain/img/photosGalerie/miniature/";
+        $em=$this->getDoctrine()->getManager();
+        foreach ($galerie->getPhotos() as $photo){
+            unlink($urlHD.$photo->getChemin());
+            unlink($urlMiniature.$photo->getChemin());
+            $photo->setGalerie(null);
+            $galerie->removePhoto($photo);
+            $em->remove($photo);
+        }
+        $em->remove($galerie);
+        $em->flush();
+        return $this->redirectToRoute('adminGalerie');
+
+    }
+
     private function copieAffiche(Affiche $affiche){
         $format=explode(".",$affiche->getChemin()->getClientOriginalName())[1];
         $com=explode(" ",$affiche->getCommentaire());
@@ -98,6 +145,7 @@ class AdminController extends Controller
         }
         $nom=substr($nom, 0, -1);
         $nom=$nom.'.'.$format;
+
         $urlHD=$this->container->getParameter('affiches_url').'/HD/'.$nom;
         $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$nom;
         $this->get('image.handling')->open($affiche->getChemin()->getPathname())->cropResize(678)->save($urlHD);
@@ -105,6 +153,44 @@ class AdminController extends Controller
         $em=$this->getDoctrine()->getManager();
         $affiche->setChemin($nom);
         $em->persist($affiche);
+        $em->flush();
+    }
+
+    private function copieCouvertureGalerie(Galerie $galerie){
+        $format=explode(".",$galerie->getImage()->getClientOriginalName())[1];
+        $com=explode(" ",$galerie->getNom());
+        $nom='';
+        foreach ($com as $comm){
+            $nom=$nom.$comm."_";
+        }
+        $nom=substr($nom, 0, -1);
+        $nom=$nom.'.'.$format;
+
+        $url="bundles/obsessionmain/img/couv-photos/".$nom;
+        $this->get('image.handling')->open($galerie->getImage()->getPathname())->cropResize(394)->save($url);
+//        $em=$this->getDoctrine()->getManager();
+        $galerie->setImage($nom);
+//        $em->persist($galerie);
+//        $em->flush();
+    }
+
+    private function copiePhotosGalerie(Galerie $galerie,$photos){
+
+        $em=$this->getDoctrine()->getManager();
+        $urlHD="bundles/obsessionmain/img/photosGalerie/HD/";
+        $urlMiniature="bundles/obsessionmain/img/photosGalerie/miniature/";
+        $num=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Photo')->findNumNouvellePhoto();
+        foreach ($photos as $photo){
+            $this->get('image.handling')->open($photo)->cropResize(1024)->save($urlHD.$num.'.jpg');
+            $this->get('image.handling')->open($photo)->cropResize(392)->save($urlMiniature.$num.'.jpg');
+            $phot=new Photo();
+            $phot->setChemin($num.'.jpg');
+            $phot->setGalerie($galerie);
+            $galerie->addPhoto($phot);
+            $num++;
+            $em->persist($phot);
+        }
+        $em->persist($galerie);
         $em->flush();
     }
 

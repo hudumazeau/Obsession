@@ -12,4 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class PhotoRepository extends EntityRepository
 {
+    public function findNumNouvellePhoto(){
+        return (count($this->findAll()))+1;
+    }
 }
