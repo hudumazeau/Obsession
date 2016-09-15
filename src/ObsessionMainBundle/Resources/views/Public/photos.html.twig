@@ -2,19 +2,19 @@
 
 {% block page %}
     <div class="phot">
-        {#<ul class="pho">#}
-            {#{% for galerie in galeries %}#}
-                {#{% if galerie.photos | length > 0 %}#}
-                    {#<li>#}
-                        {#<a href="{{ path('galerie',{'galerie':galerie.id}) }}">#}
-                            {#<img src="{{ asset('bundles/obsessionmain/img/couv-photos/'~galerie.image) }}" alt="" />#}
-                        {#</a>#}
-                    {#</li>#}
-                {#{% endif %}#}
-            {#{% endfor %}#}
-        {#</ul>#}
+        <ul class="pho">
+            {% for galerie in galeries %}
+                {% if galerie.photos | length > 0 %}
+                    <li>
+                        <a href="{{ path('galerie',{'galerie':galerie.id}) }}">
+                            <img src="{{ asset('bundles/obsessionmain/img/couv-photos/'~galerie.image) }}" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
-            <p><center><img src="{{ asset("bundles/obsessionmain/img/travaux.png") }}" width="80%"/> </center></p>
+            {#<p><center><img src="{{ asset("bundles/obsessionmain/img/travaux.png") }}" width="80%"/> </center></p>#}
 
     </div>
 {% endblock %}
