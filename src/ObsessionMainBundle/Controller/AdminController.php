@@ -101,7 +101,8 @@ class AdminController extends Controller
         $form=$this->createForm('ObsessionMainBundle\Form\GalerieType',$galerie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-
+            dump($_FILES['file']['tmp_name']);
+            die;
             $this->copieCouvertureGalerie($galerie);
             $this->copiePhotosGalerie($galerie,$_FILES['file']['tmp_name']);
             return $this->redirectToRoute('adminGalerie');
