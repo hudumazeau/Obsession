@@ -101,8 +101,6 @@ class AdminController extends Controller
         $form=$this->createForm('ObsessionMainBundle\Form\GalerieType',$galerie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            dump($_FILES['file']['tmp_name']);
-            die;
             $this->copieCouvertureGalerie($galerie);
             $this->copiePhotosGalerie($galerie,$_FILES['file']['tmp_name']);
             return $this->redirectToRoute('adminGalerie');
@@ -111,6 +109,24 @@ class AdminController extends Controller
         return $this->render('@ObsessionMain/Admin/adminGaleries.html.twig',array(
             'galeries'=>$lesGaleries,
             'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/galeriesAdd/{galerie}",name="adminGalerieAjPhotos")
+     * @Method({"GET", "POST"})
+     */
+    public function adminGalerieAjPhotosAction(Request $request,Galerie $galerie){
+        $gal=new Galerie();
+        $form=$this->createForm('ObsessionMainBundle\Form\GalerieVideType',$gal);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $this->copiePhotosGalerie($galerie,$_FILES['file']['tmp_name']);
+            return $this->redirectToRoute('adminGalerie');
+        }
+        return $this->render('@ObsessionMain/Admin/adminGaleriesAjPhotos.html.twig',array(
+            'galerie'=>$galerie,
+            'form'=>$form->createView()
         ));
     }
 

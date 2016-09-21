@@ -1,0 +1,50 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <br>
+    <div style="background-color: rgba(0,0,0,0.3);width: 100%;border: 1px solid #ba0f6f">
+        <a href="{{ path('adminGalerie') }}" class="btn btn-default" style="float: left;margin: 4px"><span
+                    class="glyphicon glyphicon-chevron-left"></span> Retour</a>
+        <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">{{ galerie.nom }}</p>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div class="alert alert-danger" role="alert" style="margin: 10px;text-align: center" id="mess" hidden="hidden" >Attention: Il n'est possible que d'ajouter 20 photos à la fois.</div>
+        <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
+            {{ form_start(form,{'attr':{'id':'galPhoto'}}) }}
+            {{ form_widget(form.image) }}
+            <label class="control-label required" >Sélectionner les photos de la soirée</label>
+            <INPUT id="photos" name="file[]" type='file' multiple='multiple' accept="image/jpeg" required="required" />
+            <input type="submit" class="btn btn-primary" value="Ajouter ces photos">
+            {{ form_end(form) }}
+        </div>
+        <br>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            var nb=0;
+
+
+            $('#photos').change(function(){
+                nb=this.files.length;
+                if(this.files.length>20){
+                    $('#mess')[0].hidden=false;
+                }else{
+                    $('#mess')[0].hidden=true;
+                }
+
+            });
+
+            $('#galPhoto').submit(function(e){
+                e.preventDefault();
+                if(nb>20)
+                        return false;
+                else   $(this).unbind('submit').submit();
+            });
+        });
+    </script>
+{% endblock %}

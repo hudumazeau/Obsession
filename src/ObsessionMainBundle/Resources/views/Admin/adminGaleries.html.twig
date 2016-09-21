@@ -8,11 +8,12 @@
         <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">Galeries</p>
         <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
         <br>
+        <div class="alert alert-danger" role="alert" style="margin: 10px;text-align: center" id="mess" hidden="hidden" >Attention: Il n'est possible que d'ajouter 19 photos à la fois.</div>
         <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
-            {{ form_start(form) }}
+            {{ form_start(form,{'attr':{'id':'galPhoto'}}) }}
             {{ form_widget(form) }}
             <label class="control-label required" >Sélectionner les photos de la soirée</label>
-            <INPUT name="file[]" type='file' multiple='multiple' accept="image/jpeg" required="required" />
+            <INPUT id="photos" name="file[]" type='file' multiple='multiple' accept="image/jpeg" required="required" />
             <input type="submit" class="btn btn-primary" value="Ajouter cette galerie">
             {{ form_end(form) }}
         </div>
@@ -25,7 +26,8 @@
                 {% for galerie in galeries %}
                     <tr style="border: 1px solid #ba0f6f">
                         <td style="border: none;text-align: center"><p style="margin-top:5px">{{ galerie.nom }}</p></td>
-                        {#<td style="border: none;text-align: center"><a href="" class="btn btn-succes btn-sm" title="{{ galerie.nom }}">Ajouter des photos</a></td>#}
+                        <td style="border: none;text-align: center"><p style="margin-top:5px">{{ galerie.photos|length ~' photos' }}</p></td>
+                        <td style="border: none;text-align: center"><a href="{{ path('adminGalerieAjPhotos',{'galerie':galerie.id}) }}" class="btn btn-success btn-sm">Ajouter des photos</a></td>
                         <td style="border: none;text-align: center"><a href="{{ path('supGalerie',{'galerie':galerie.id}) }}" class="btn btn-danger btn-sm sup" title="{{ galerie.nom }}">Supprimer la galerie</a></td>
                     </tr>
                 {% endfor %}
@@ -58,6 +60,7 @@
     <script>
         $(document).ready(function(){
             var theHREF;
+            var nb=0;
 
             $(".sup").on('click',function (e) {
                 e.preventDefault();
@@ -72,6 +75,23 @@
 
             $("#confirmModalYes").click(function(e) {
                 window.location.href = theHREF;
+            });
+
+            $('#photos').change(function(){
+                nb=this.files.length;
+                if(this.files.length>19){
+                    $('#mess')[0].hidden=false;
+                }else{
+                    $('#mess')[0].hidden=true;
+                }
+
+            });
+
+            $('#galPhoto').submit(function(e){
+                e.preventDefault();
+                if(nb>19)
+                        return false;
+                else   $(this).unbind('submit').submit();
             });
         });
     </script>
