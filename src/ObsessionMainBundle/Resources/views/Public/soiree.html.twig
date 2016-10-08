@@ -1,7 +1,10 @@
 {% extends '@ObsessionMain/baseObsession.html.twig' %}
 
-{% block page %}
+{% block css %}
+    <link href="{{ asset('bundles/obsessionmain/css/Affiches.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
 
+{% block page %}
     {% for moi in mois %}
         <div class="calendrier">
             <p class="center"><img src="{{ asset(moi.url) }}" width="80%"></p>
@@ -23,6 +26,16 @@
             </div>
         </div>
     {% endfor %}
+        <div class="wrap">
+            <h2>&nbsp;</h2>
+            <div class="frame" id="basic" >
+                <ul class="clearfix">
+                    {% for affiche in affiches %}
+                        <li><a class="group2 affiches" href="{{ url~"/HD/"~affiche.chemin }}" title="{{ affiche.commentaire }}"><img class="affiche"  src="{{ url~"/miniature/"~affiche.chemin }}" height="89%"></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
     <div class="modal fade" id="afficheModal" >
         <div class="modal-dialog" role="document">
@@ -42,15 +55,15 @@
     </div><!-- /.modal -->
 {% endblock %}
 
-{% block affiches %}
-    <div class="ligne">
-        <p class="affi">
-            {% for affiche in affiches %}
-                <a class="group2 affiches" href="{{ url~"/HD/"~affiche.chemin }}" title="{{ affiche.commentaire }}"><img class="affiche"  src="{{ url~"/miniature/"~affiche.chemin }}" height="100%"></a>
-            {% endfor %}
-        </p>
-    </div>
-{% endblock %}
+{#{% block affiches %}#}
+    {#<div class="ligne">#}
+        {#<p class="affi">#}
+            {#{% for affiche in affiches %}#}
+                {#<a class="group2 affiches" href="{{ url~"/HD/"~affiche.chemin }}" title="{{ affiche.commentaire }}"><img class="affiche"  src="{{ url~"/miniature/"~affiche.chemin }}" height="100%"></a>#}
+            {#{% endfor %}#}
+        {#</p>#}
+    {#</div>#}
+{#{% endblock %}#}
 
 {% block javascripts %}
     {{ parent() }}
