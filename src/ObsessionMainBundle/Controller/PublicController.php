@@ -51,6 +51,7 @@ class PublicController extends Controller
     public function photosAction()
     {
         $galeries=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Galerie')->findAll();
+        $galeries=array_reverse($galeries);
         return $this->render('ObsessionMainBundle:Public:photos.html.twig', array(
             'galeries'=>$galeries
         ));
