@@ -1,14 +1,14 @@
 /* Example wrapper */
 
 .wrap {
-    position: relative;
-    margin: 3em 0;
+margin: 0px;
 }
 
 
 /* Frame */
 
 .frame {
+    margin: 0px;
     height: 250px;
     line-height: 250px;
     overflow: hidden;

@@ -6,7 +6,7 @@
 
 {% block page %}
     {% for moi in mois %}
-        <div class="calendrier">
+        <div class="calendrier"">
             <p class="center"><img src="{{ asset(moi.url) }}" width="80%"></p>
             <div class="date">
                 <p class="textCalendrier"></p>
@@ -26,9 +26,7 @@
             </div>
         </div>
     {% endfor %}
-    <br>
-    <br>
-        <div class="wrap">
+        <div class="wrap" style="float: left">
             <h2>&nbsp;</h2>
             <div class="frame" id="basic" >
                 <ul class="clearfix">
