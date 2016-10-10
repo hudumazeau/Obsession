@@ -4,7 +4,7 @@
     <div style="margin: 0px 70px 0px 70px"  >
         {#<iframe class="video" src="https://www.youtube.com/embed/zC0keHO5hlk" frameborder="0" allowfullscreen></iframe>#}
         <p style="text-align: center">
-            <iframe src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <iframe class="iframeVideo" src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </p>
     </div>
     <div style="width: 90%;margin: auto">
@@ -20,34 +20,86 @@
         <p class="centerSansMarge">
             <img class="barSeparation" style="margin-top:18px;" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
         </p>
-        <div>
-            <div style="float:left;width:23%;">
+        <div class="cach" >
+            <div style="float:left;margin-right: 30px">
                 <p style="margin:0px;padding:0px;font-family:Intro;font-size:46px;letter-spacing:-0.15em;color:white">&nbspRETROUVEZ</p>
                 <p style="margin-left:3px;margin-top:-42px;margin-bottom:-0.13em;padding:0px;font-family:Intro;font-size:93px;letter-spacing:-0.15em;color:#f828b6;">NOUS</p>
             </div>
-            <div style="float:left;width:12%;">
+            <div style="float:left;">
                 <a href="https://www.facebook.com/101442619628"><img src="{{ asset('bundles/obsessionmain/img/logoFacebook.png') }}" width="55%" style="margin-top:2.2em"/></a>
             </div>
-            <div style="float:left;width:13%;">
-                <a href="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F101442619628&amp"><img src="{{ asset('bundles/obsessionmain/img/logoFacebookJaime.png') }}" width="75%" style="margin-top:1.3em;margin-left:-0.8em"/></a>
+            <div style="float:left;">
+                <a class="like"><img src="{{ asset('bundles/obsessionmain/img/logoFacebookJaime.png') }}" width="75%" style="margin-top:1.3em;margin-left:-0.8em"/></a>
             </div>
-            <div class="face"  style="float:left;width:26%;margin-top:2.5%">
-                <a href="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F101442619628&amp" style="text-decoration:none""><p style="font-family:amplify;font-size:60px;color:white;font-style: italic;display:inline">Like </p></a>
+            <div class="face"  style="float:left;margin-top:2.5%;margin-right:48px">
+                <a class="like" style="text-decoration:none"><p style="font-family:amplify;font-size:60px;color:white;font-style: italic;display:inline">Like </p></a>
                 <p style="font-family:amplify;font-size:42px;color:white;display:inline;font-style: italic;">et </p>
                 <a href="http://www.facebook.com/share.php?u=https://www.facebook.com/101442619628" style="text-decoration:none"><p style="margin:0px;padding:0px;font-family:amplify;font-size:47px;color:white;display:inline;font-style: italic;">partage!</p></a>
             </div>
-            <div style="float:left;width:3%;">
+            <div style="float:left;margin-right: 25px">
                 <img src="{{ asset('bundles/obsessionmain/img/Separation.png') }}" width="7px" style="margin-top:0.8em;margin-left:-0.8em"/>
             </div>
-            <div style="float:left;width:22%;">
+            <div style="float:left;">
                 <p style="margin:0px;margin-top:0.65em;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
                 <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
             </div>
         </div>
+        <center>
+            <div class="appa appa2" style="padding-top: 10px">
+                <div style="float:left;">
+                    <p style="margin:0px;padding:0px;font-family:Intro;font-size:46px;letter-spacing:-0.15em;color:white">&nbspRETROUVEZ</p>
+                    <p style="margin-left:3px;margin-top:-42px;margin-bottom:-0.13em;padding:0px;font-family:Intro;font-size:93px;letter-spacing:-0.15em;color:#f828b6;">NOUS</p>
+                </div>
+                <div style="float:left;margin-left: 25px">
+                    <a href="https://www.facebook.com/101442619628"><img src="{{ asset('bundles/obsessionmain/img/logoFacebook.png') }}" width="55%" style="margin-top:2.2em"/></a>
+                </div>
+                <br>
+            </div>
+            <div class="appa">
+                <p class="centerSansMarge" >
+                    <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="65%" height="2px"/>
+                </p>
+                <div style="text-align: center;margin-top: 0px;">
+                    <p style="margin:0px;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
+                    <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
+                </div>
+            </div>
+            <div class="appa2" >
+                <div style="float:left;">
+                    <a class="like"><img src="{{ asset('bundles/obsessionmain/img/logoFacebookJaime.png') }}" width="75%" style="margin-bottom: -7.5em"/></a>
+                </div>
+            </div>
+            <div class="appa2">
+                <p class="centerSansMarge" >
+                    <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="2px"/>
+                </p>
+                <div style="text-align: center;margin-top: 0px;">
+                    <p style="margin:0px;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
+                    <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
+                </div>
+            </div>
+        </center>
         <p class="centerSansMarge" >
             <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
         </p>
     </div>
+
+    <div class="modal fade" id="confirmModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 style="font-family: Hero;float: left">Disco mobile Obsession</h3>
+                    <img src="{{ asset('bundles/obsessionmain/img/favicon.png') }}" style="float: left;margin-left: 12px;margin-top: 14px">
+                </div>
+                <div class="modal-body" id="contenu" style="text-align: center">
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" id="confirmModalNo">Fermer</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     
 {% endblock %}
@@ -77,6 +129,17 @@
                         ChangerDate();
                     }
                 }
+            });
+
+            $(".like").on('click',function (e) {
+                e.preventDefault();
+                $('#contenu')[0].innerHTML="<iframe src='https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F101442619628&amp' style='border:none'></iframe>";
+                $('#confirmModal').modal("show");
+            });
+
+
+            $("#confirmModalNo").click(function(e) {
+                $("#confirmModal").modal("hide");
             });
         });
     </script>

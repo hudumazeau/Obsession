@@ -10,13 +10,43 @@
         </p>
         <nav class="Menu">
             <ul class="ulMenu">
-                <li class="liMenu"><a href="{{ path('index') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/ACCUEIL.png') }}" width="70%"/></a></li>
-                <li class="liMenu"><a href="{{ path('presentation') }}"><img src="{{  asset('bundles/obsessionmain/img/Menu/PRESENTATION.png') }}" width="70%"/></a></li>
-                <li class="liMenu"><a href="{{ path('photos') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/PHOTOS.png') }}" width="70%"/></a></li>
-                <li class="liMenu"><a href="{{ path('soiree') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/SOIREES.png') }}" width="70%"/></a></li>
-                <li class="liMenu"><a href="{{ path('contact') }}"><img src="{{ asset('bundles/obsessionmain/img/Menu/CONTACTS.png') }}" width="70%"/></a></li>
+                <li class="liMenu" ><a href="{{ path('index') }}"><img class="img" src="{{ asset('bundles/obsessionmain/img/Menu/ACCUEIL.png') }}" /></a></li>
+                <li class="liMenu" ><a href="{{ path('presentation') }}"><img class="img" src="{{  asset('bundles/obsessionmain/img/Menu/PRESENTATION.png') }}"/></a></li>
+                <li class="liMenu"><a href="{{ path('photos') }}"><img class="img" src="{{ asset('bundles/obsessionmain/img/Menu/PHOTOS.png') }}" /></a></li>
+                <li class="liMenu liMenu2"><a href="{{ path('soiree') }}"><img class="img" src="{{ asset('bundles/obsessionmain/img/Menu/SOIREES.png') }}" /></a></li>
+                <li class="liMenu"><a href="{{ path('contact') }}"><img class="img" src="{{ asset('bundles/obsessionmain/img/Menu/CONTACTS.png') }}" /></a></li>
             </ul>
         </nav>
+        <div class="row men">
+            <div class="col-sm-3">
+                <div class="sidebar-nav" >
+                    <div class="navbar navbar-default" role="navigation"  style="background-color: transparent;border:none">
+                        <div class="navbar-header" style="text-align: center">
+                            <button style="float: none;width: 100px;background-color: #cccccc" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                <h4 style="font-family: Hero;color: #555555;margin-top: 0px">Menu</h4>
+                                <span style="width: 77px;background-color: #666666" class="icon-bar"></span>
+                                <span style="width: 77px;background-color: #666666" class="icon-bar"></span>
+                                <span style="width: 77px;background-color: #666666"class="icon-bar"></span>
+                            </button>
+                            {#<span class="visible-xs navbar-brand">Menu</span>#}
+                        </div>
+                        <div class="navbar-collapse collapse sidebar-navbar-collapse" style="border: none;">
+                            <ul class="nav navbar-nav" style="text-align: center;">
+                                <li class="btn btn-default" style="background-color: #cccccc;color:#666666;margin:0px 50px"><a href="{{ path('index') }}">Accueil</a></li>
+                                <br>
+                                <li class="btn btn-default" style="background-color: #cccccc;color:#666666;margin:0px 50px"><a href="{{ path('presentation') }}">Présentation</a></li>
+                                <br>
+                                <li class="btn btn-default" style="background-color: #cccccc;color:#666666;margin:0px 50px"><a href="{{ path('photos') }}">Photos</a></li>
+                                <br>
+                                <li class="btn btn-default" style="background-color: #cccccc;color:#666666;margin:0px 50px"><a href="{{ path('soiree') }}">Soirées</a></li>
+                                <br>
+                                <li class="btn btn-default" style="background-color: #cccccc;color:#666666;margin:0px 50px"><a href="{{ path('contact') }}">Contacts</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
         <p class="centerSansMarge">
             <img class="barSeparation" src="{{ asset("bundles/obsessionmain/img/BarsSeparation.png") }}" width="85%"/>
         </p>
