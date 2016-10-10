@@ -256,6 +256,9 @@ iframe.iframeVideo{
     max-width: 100%;
 }
 
+br.bbb{
+    display: none;
+}
 @media screen and (max-width: 750px) {
     div.cach{
         display: none;
@@ -267,6 +270,9 @@ iframe.iframeVideo{
         display: none;
     }
     div.men{
+        display: block;
+    }
+    br.bbb{
         display: block;
     }
 }
@@ -293,6 +299,9 @@ iframe.iframeVideo{
         float: left;
         padding: 0px;
         margin:0px -40px
+    }
+    br.bbb{
+        display: block;
     }
 
 }
