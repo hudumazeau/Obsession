@@ -256,7 +256,7 @@ iframe.iframeVideo{
     max-width: 100%;
 }
 
-@media all and (max-width: 750px) {
+@media screen and (max-width: 750px) {
     div.cach{
         display: none;
     }
@@ -271,7 +271,7 @@ iframe.iframeVideo{
     }
 }
 
-@media all and (min-width: 751px) and (max-width: 1199px) {
+@media screen and (min-width: 751px) and (max-width: 1199px) {
     div.cach{
         display: none;
     }
@@ -297,7 +297,7 @@ iframe.iframeVideo{
 
 }
 
-@media all and (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
     div.ad{
         margin: 0 9%;
     }
