@@ -142,6 +142,40 @@
             $("#confirmModalNo").click(function(e) {
                 $("#confirmModal").modal("hide");
             });
+
+
+
+            var width = $(window).width();
+
+            function tailleVideo() {
+                    width = $(this).width();
+                    if (width < 1200) {
+                        if (width > 979) {
+                            $('.iframeVideo')[0].style.height = '337px';
+                        }else{
+                            if(width>737){
+                                $('.iframeVideo')[0].style.height = '245px';
+                            }else{
+                                $('.iframeVideo')[0].style.height =(width*(0.390909)-48.855).toString()+'px' ;
+                            }
+                        }
+                    }else{
+                        $('.iframeVideo')[0].style.height = '376px';
+                    }
+            }
+
+
+            $(window).resize(function(){
+                tailleVideo();
+            });
+
+            tailleVideo();
+
+
+
+
+
+
         });
     </script>
 {% endblock %}
