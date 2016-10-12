@@ -128,7 +128,9 @@ class PublicController extends Controller
         foreach ($soirees as $soiree){
             $text[]=$soiree->getLieu()->getVille().' - '.$soiree->getDate()->format('d').' '.$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Mois')->findOneBy(array('id'=>$soiree->getDate()->format('m')))->getDesignation();
         }
-        return new JsonResponse($text);
+        $response=new JsonResponse($text);
+        $response->headers->set('Access-Control-Allow-Origin','*');
+        return $response;
     }
     /**
      *
