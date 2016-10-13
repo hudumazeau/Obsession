@@ -132,6 +132,28 @@ class PublicController extends Controller
         $response->headers->set('Access-Control-Allow-Origin','*');
         return $response;
     }
+
+    /**
+     *
+     * @Route("/ajaxPhone", name="ajax_soirees_phone")
+     * @Method({"GET", "POST"})
+     */
+    public function ajaxAdminPhoneAction(Request $request)
+    {
+        $soirees=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Soiree')->findFiveSoirees();
+        $text=array();
+        foreach ($soirees as $soiree){
+            $res=array();
+            $res['id']=$soiree->getId();
+            $res['ville']=$soiree->getLieu()->getVille();
+            $res['date']=$soiree->getDate()->format('d').' '.$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Mois')->findOneBy(array('id'=>$soiree->getDate()->format('m')))->getDesignation();
+            $text[]=$res;
+        }
+        $response=new JsonResponse($text);
+        $response->headers->set('Access-Control-Allow-Origin','*');
+        return $response;
+    }
+
     /**
      *
      * @Route("/ajaxGalerie/{galerie}", name="ajax_galerie")
