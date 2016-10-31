@@ -1,0 +1,74 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block css %}
+    <link href="{{ asset('bundles/obsessionmain/css/PresentationDJ.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block page %}
+    <div class="menPPres">
+        <br>
+        <div  style="display: inline;float: right">
+            <div style="display: inline;float: left">
+                <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px"></p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationEvenementiel') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationLocation') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;LOCATION</p></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="presentation" style="float: left">
+        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <p style="font-family:Intro;color:#eeeeee;font-size:30px;margin:0px;margin-left: 3px;letter-spacing: -3px">SET DJ'S</p>
+        <img class="barSeparation" style="margin-top: -15px" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <br><br>
+        <div style="display: inline">
+            <img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="40px">
+            <p style="float: left;font-family: Intro;color: #eeeeee;font-size: 33px ;letter-spacing: -3px;margin-top: -2px">&nbsp;&nbsp;Playlist</p>
+        </div>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Notre style musical sait s'adapter à tous types de demandes et de</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">soirées. Notre playlist reste de nature commerciale en suivant les</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">tendances actuelles, tout en préserveant son originalité: notre</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">équipe de Dj permet une diversité de style musicaux (années</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">80-90, club, latino/soleil/caliente, hip-hop, funk, deep house,</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">électro....).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br><br>
+        <div style="display: inline;">
+            <img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="40px">
+            <p style="float: left;font-family: Intro;color: #eeeeee;font-size: 33px ;letter-spacing: -3px;margin-top: -2px">&nbsp;&nbsp;Cadeaux</p>
+        </div>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Bracelet fluo, t-shirt, bouteilles, autocollants, préservatifs....</p>
+        <br> <br> <br> <br> <br> <br>
+        <div style="display: inline;">
+            <img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="40px">
+            <p style="float: left;font-family: Intro;color: #eeeeee;font-size: 33px ;letter-spacing: -3px;margin-top: -2px">&nbsp;&nbsp;Pack Communication & Marketing</p>
+        </div>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Affiches promotionnelles, visuels réseaux sociaux et partage sur</p>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px"> les médias numériques. Impression pour affichage.</p>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Photos de vos soirées à retrouver sur la page facebook Obsession.</p>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Vidéo de la soirée à la demande.</p>
+        <br><br><br> <br> <br> <br> <br> <br> <br><br><br> <br><br>
+    </div>
+    <div style="float: left;margin-top: 20px;padding-left: 80px" class="menPres">
+        <br>
+        <br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px"></p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationEvenementiel') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationLocation') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;LOCATION</p></a>
+        </div>
+    </div>
+{% endblock %}

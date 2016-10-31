@@ -68,6 +68,39 @@ class PublicController extends Controller
     }
 
     /**
+     * @Route("/evenementiel",name="presentationEvenementiel")
+     * @Method({"GET", "POST"})
+     */
+    public function presentationEvenementielAction()
+    {
+        return $this->render('ObsessionMainBundle:Public:presentationEvenementiel.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/dj",name="presentationSetDj")
+     * @Method({"GET", "POST"})
+     */
+    public function presentationDjAction()
+    {
+        return $this->render('ObsessionMainBundle:Public:presentationDJ.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
+     * @Route("/location",name="presentationLocation")
+     * @Method({"GET", "POST"})
+     */
+    public function presentationLocationAction()
+    {
+        return $this->render('ObsessionMainBundle:Public:presentationLocation.html.twig', array(
+            // ...
+        ));
+    }
+
+    /**
      * @Route("/galerie/{galerie}",name="galerie")
      * @Method({"GET", "POST"})
      */

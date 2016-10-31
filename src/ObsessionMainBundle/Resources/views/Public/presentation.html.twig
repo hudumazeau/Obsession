@@ -5,22 +5,62 @@
 {% endblock %}
 
 {% block page %}
-    <div class="presentation">
-        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="40%"/>
-        <p style="font-family:Intro;color:#eeeeee;font-size:30px;margin:0px;">QUI SOMMES NOUS ?</p>
-        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="40%"/>
-        <p class="textPresentation" style="margin-top:18px;">Depuis 2009, <span class="rose">Obsession</span> cree vos soirees sur la region.</p>
-        <p class="textPresentation">Fort de son experience, c’est entre <span class="rose">50 et 60</span></p>
-        <p class="textPresentation"><span class="rose">prestations</span> soirees qui sont realisees chaque annee.</p>
-        <p class="textPresentation">Celles-ci comprennent l’animation, la distribution de</p>
-        <p class="textPresentation">cadeaux, l’aide à la communication (affiches person-</p>
-        <p class="textPresentation">nalisees, reseaux sociaux,…).</p>
-        <p class="textPresentation"><span class="rose">Obsession</span>, c’est egalement  de la location de materiel</p>
-        <p class="textPresentation">professionnel pour vos soirees</p>
-        <p class="textPresentation">privees ou publics.  <a href="https://www.facebook.com/location.sono.cantal.15"><img src="{{ asset("bundles/obsessionmain/img/facebookPresentation.png") }}" width="2.2%"/></a></p>
-        <p class="textPresentation"><span class="rose">Obsession</span>, c’est aussi la sonorisation et l’eclairage de</p>
-        <p class="textPresentation">spectacle.   <a href="https://www.facebook.com/pages/Obsession-spectacle/679952675422590"><img src="{{ asset("bundles/obsessionmain/img/facebookPresentation.png") }}" width="2.2%"/></a></p>
-        <p class="textPresentation"><span class="rose">Obsession</span>, c’est aussi depuis cette annee, de la</p>
-        <p class="textPresentation">video-projection.</p>
+    <div class="menPPres">
+        <br>
+        <div  style="display: inline;float: right">
+            <div style="display: inline;float: left">
+                <a href="{{ path('presentationSetDj') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;SET DJ'S</p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationEvenementiel') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationLocation') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;LOCATION</p></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="presentation" style="float: left">
+        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <p style="font-family:Intro;color:#eeeeee;font-size:20.5px;margin:0px;margin-left: 3px">QUI SOMMES NOUS ?</p>
+        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <p class="textPresentation" style="margin-top:18px;"><span class="rose">Obsession</span> a été créé en 2009. Toujours en perpétuel recherche</p>
+        <p class="textPresentation">d'innovations pour des prestations publics et privées. </p>
+        <p class="textPresentation"><span class="rose">Nous</span> réinventons vos soirées, en s'adaptant et fidélisant notre</p>
+        <p class="textPresentation">clientèle au travers de soirées toujours plus originales et inven-</p>
+        <p class="textPresentation">tives.</p>
+        <p class="textPresentation">Nos prestations en tant que <span class="rose">DJ sont la priorité et restent toujours</span></p>
+        <p class="textPresentation"><span class="rose">dans un gout actuel des tendances</span> avec une recherche et une</p>
+        <p class="textPresentation">diversité de playlist tout en proposant une large palette musicale</p>
+        <p class="textPresentation">par le biais de plusieurs intervenants <span style="font-style: italic">(soirées à thèmes, ambiance,</span></p>
+        <p class="textPresentation"><span style="font-style: italic">style musical).</span></p>
+        <p class="textPresentation">Le but étant de vous proposer un service de qualité avec du</p>
+        <p class="textPresentation">matériel de sonorisation et de lumière professionnel.</p>
+        <p class="textPresentation">Actuellement, avec plus de <span class="rose">50 dates par an</span> et plus de <span class="rose">2000 fans</span></p>
+        <p class="textPresentation">sur les réseaux sociaux, <span class="rose">Obsession fait partie des acteurs majeurs</span></p>
+        <p class="textPresentation"><span class="rose">incontournables dans la région.</span></p>
+        <p class="rotText" style="font-family: Amplify;color: #eeeeee;font-size: 55px;margin-top:-15px">Réinventons vos soirées !!!</p>
+        <br><br><br><br> <br><br>
+    </div>
+    <div style="float: left;margin-top: 20px;padding-left: 80px" class="menPres">
+        <br>
+        <br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationSetDj') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;SET DJ'S</p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationEvenementiel') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationLocation') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;LOCATION</p></a>
+        </div>
     </div>
 {% endblock %}

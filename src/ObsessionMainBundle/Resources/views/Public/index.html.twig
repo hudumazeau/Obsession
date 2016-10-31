@@ -1,5 +1,9 @@
 {% extends '@ObsessionMain/baseObsession.html.twig' %}
 
+{% block css %}
+    <link href="{{ asset('bundles/obsessionmain/css/index.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+
 {% block page %}
     <div style="margin: 0px 70px 0px 70px"  >
         {#<iframe class="video" src="https://www.youtube.com/embed/zC0keHO5hlk" frameborder="0" allowfullscreen></iframe>#}
@@ -15,11 +19,11 @@
             <div class="Dates">
                 <p style="display:inline;font-size:43px;margin:0px;font-family:Intro;letter-spacing:-6.5px;color:#cececd">PROCHAINES &nbsp DATES&nbsp&nbsp:&nbsp&nbsp&nbsp</p>
                 <br class="bbb">
-                <p id="Date" style="display:inline;color:#f828b6;font-family:mksd;font-size:43px;letter-spacing:4px;margin:0px;padding-top:8px;"></p>
+                <a href="{{ path('soiree') }}" style="text-decoration: none"><p id="Date" style="display:inline;color:#f828b6;font-family:mksdMedium;font-size:43px;letter-spacing:4px;margin:0px;padding-top:8px;"></p></a>
             </div>
         </center>
         <p class="centerSansMarge">
-            <img class="barSeparation" style="margin-top:18px;" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
+            <img class="barSeparation" style="margin-top: -10px" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
         </p>
         <div class="cach" >
             <div style="float:left;margin-right: 30px">
@@ -27,7 +31,7 @@
                 <p style="margin-left:3px;margin-top:-42px;margin-bottom:-0.13em;padding:0px;font-family:Intro;font-size:93px;letter-spacing:-0.15em;color:#f828b6;">NOUS</p>
             </div>
             <div style="float:left;">
-                <a href="https://www.facebook.com/101442619628"><img src="{{ asset('bundles/obsessionmain/img/logoFacebook.png') }}" width="55%" style="margin-top:2.2em"/></a>
+                <a href="https://www.facebook.com/101442619628"><img src="{{ asset('bundles/obsessionmain/img/logoFacebook.png') }}" width="55%" style="margin-top:2.5em"/></a>
             </div>
             <div style="float:left;">
                 <a class="like"><img src="{{ asset('bundles/obsessionmain/img/logoFacebookJaime.png') }}" width="75%" style="margin-top:1.3em;margin-left:-0.8em"/></a>
@@ -40,8 +44,8 @@
             <div style="float:left;margin-right: 25px">
                 <img src="{{ asset('bundles/obsessionmain/img/Separation.png') }}" width="7px" style="margin-top:0.8em;margin-left:-0.8em"/>
             </div>
-            <div style="float:left;">
-                <p style="margin:0px;margin-top:0.65em;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
+            <div style="float:left; margin-top: -20px">
+                <p style="margin:0px;margin-top:0.65em;padding:0px;font-family:mksdMedium;font-size:48px;color:white">{{ adresse.numero }}</p>
                 <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
             </div>
         </div>
@@ -61,9 +65,10 @@
                     <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="65%" height="2px"/>
                 </p>
                 <div style="text-align: center;margin-top: 0px;">
-                    <p style="margin:0px;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
-                    <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
+                    <p style="margin:0px;padding:0px;font-family:mksdMedium;font-size:48px;color:white">{{ adresse.numero }}</p>
+                    <p style="margin:-0.2em;padding:0px;font-family:mksdMedium;font-size:28px;color:white">obsessionm@hotmail.fr</p>
                 </div>
+                <br>
             </div>
             <div class="appa2" >
                 <div style="float:left;">
@@ -76,12 +81,13 @@
                 </p>
                 <div style="text-align: center;margin-top: 0px;">
                     <p style="margin:0px;padding:0px;font-family:mksd;font-size:48px;color:white">{{ adresse.numero }}</p>
-                    <p style="margin:-0.2em;padding:0px;font-family:mksd;font-size:28px;color:white">obsessionm@hotmail.fr</p>
+                    <p style="margin:-0.2em;padding:0px;font-family:mksdMedium;font-size:28px;color:white">obsessionm@hotmail.fr</p>
                 </div>
+                <br>
             </div>
         </center>
         <p class="centerSansMarge" >
-            <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
+            <img class="barSeparation" style="margin-top: -25px" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="4px"/>
         </p>
     </div>
 

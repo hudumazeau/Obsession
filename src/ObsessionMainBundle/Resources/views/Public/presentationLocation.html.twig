@@ -1,0 +1,79 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block css %}
+    <link href="{{ asset('bundles/obsessionmain/css/PresentationLocation.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block page %}
+    <div class="menPPres">
+        <br>
+        <div  style="display: inline;float: right">
+            <div style="display: inline;float: left">
+                <a href="{{ path('presentationSetDj') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;SET DJ'S</p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationEvenementiel') }}" class="cbcb"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="35px"></a>
+                <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+            </div>
+            <div style="display: inline;float: left;margin-left: 50px">
+                <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 30px ;letter-spacing: -4.5px;margin-top: -1px"></p></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="presentation" style="float: left">
+        <img class="barSeparation" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <p style="font-family:Intro;color:#eeeeee;font-size:30px;margin:0px;margin-left: 3px;letter-spacing: -3px">LOCATION</p>
+        <img class="barSeparation" style="margin-top: -15px" src="{{ asset('bundles/obsessionmain/img/BarsSeparationPresentation.png') }}" width="35%"/>
+        <br><br>
+        <div style="display: inline">
+           <img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="40px">
+           <p style="float: left;font-family: Intro;color: #eeeeee;font-size: 33px ;letter-spacing: -3px;margin-top: -2px">&nbsp;&nbsp;Privé&nbsp;&&nbsp;Professionnel</p>
+        </div>
+        <p class="textPresentation" style="float: left;margin-top: -10px;margin-left: 50px">Obsession met à disposition du matériel professionnel pour vos</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">soirées ou évènements divers.</p>
+        <p class="textPresentation" style="float: left;margin-top: -5px;margin-left: 50px">Ce service s'adresse à des clients privés ou pros.</p>
+        <br> <br> <br> <br> <br> <br> <br> <br>
+        <div style="display: inline;">
+            <img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="40px">
+            <p style="float: left;font-family: Intro;color: #eeeeee;font-size: 33px ;letter-spacing: -3px;margin-top: -2px">&nbsp;&nbsp;Tarifs</p>
+        </div>
+        <br> <br><br>
+        <table style="float: left;margin-top: -10px;margin-left: 50px;font-family: mksdMedium;color: #ffffff;font-size: 25px">
+            <tr>
+                <td>Enceinte amplifiée Yamaha DXR15</td>
+                <td style="padding-left: 40px">60€ / jour</td>
+            </tr>
+            <tr>
+                <td>Pied enceinte Audiophony Cab 200</td>
+                <td style="padding-left: 40px">5€ / jour</td>
+            </tr>
+            <tr>
+                <td>Microphone HF Audiophony Pack go hand</td>
+                <td style="padding-left: 40px">10€ / jour</td>
+            </tr>
+            <tr>
+                <td>Par à LED Contest IR LED</td>
+                <td style="padding-left: 40px">20€ / jour</td>
+            </tr>
+        </table>
+    </div>
+    <div style="float: left;margin-top: 20px;padding-left: 80px" class="menPres">
+        <br>
+        <br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationSetDj') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationSetDj') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;SET DJ'S</p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationEvenementiel') }}"><img src="{{ asset('bundles/obsessionmain/img/btn.png') }}" style="opacity: 0.6;float: left" width="50px"></a>
+            <a href="{{ path('presentationEvenementiel') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px">&nbsp;&nbsp;&nbsp;EVENEMENTIEL</p></a>
+        </div>
+        <br><br><br><br><br><br>
+        <div style="display: inline;">
+            <a href="{{ path('presentationLocation') }}"><p style="float: left;font-family: Intro;color: #eeeeee;font-size: 40px ;letter-spacing: -6px;margin-top: -2px"></p></a>
+        </div>
+    </div>
+{% endblock %}
