@@ -87,7 +87,7 @@ then
 	fi
 fi
 
-# --Photos -- #
+# -- Photos -- #
 
 nbPhotosWeb=$(ls Obsession/web/bundles/obsessionmain/img/photosGalerie/HD/ | wc -l)
 nbPhotosSrc=$(ls Obsession/src/ObsessionMainBundle/Resources/public/img/photosGalerie/HD/ | wc -l)
@@ -129,3 +129,41 @@ then
 	fi
 fi
 
+# -- Musiques -- #
+
+nbMusiquesWeb=$(ls Obsession/web/bundles/obsessionmain/music/ | wc -l)
+nbMusiquesSrc=$(ls Obsession/src/ObsessionMainBundle/Resources/public/music/ | wc -l)
+musiquesWeb=(`ls -t Obsession/web/bundles/obsessionmain/music/`)
+musiquesSrc=(`ls -t Obsession/src/ObsessionMainBundle/Resources/public/music/`)
+
+if [ $nbMusiquesWeb != $nbMusiquesSrc ]
+then
+	# -- Une musique à été ajoutée -- #
+	if [ $nbMusiquesWeb > $nbMusiquesSrc ]
+	then
+		i=0
+		while [ "$i" -lt "${#musiquesWeb[*]}" ]
+		do
+			if [[ ! ${musiquesSrc[*]} =~ "${musiquesWeb[$i]}" ]]
+			then
+				cp  Obsession/web/bundles/obsessionmain/music/${musiquesWeb[$i]} Obsession/src/ObsessionMainBundle/Resources/public/music/${musiquesWeb[$i]}
+			fi
+			((i++))
+		done
+	fi
+
+	# -- Une musique à été supprimée -- #
+	if [ $nbMusiquesWeb < $nbMusiquesSrc ]
+        then
+		j=0
+                while [ "$j" -lt "${#musiquesSrc[*]}" ]
+                do
+                        if [[ ! ${musiquesWeb[*]} =~ "${musiquesSrc[$j]}" ]]
+                        then
+                                rm  Obsession/src/ObsessionMainBundle/Resources/public/music/${musiquesSrc[$j]}
+                        fi
+                        ((j++))
+                done
+
+	fi
+fi

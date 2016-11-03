@@ -36,6 +36,13 @@ class Galerie
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="musique", type="string", length=255)
+     */
+    private $musique;
+
+    /**
      *
      * @ORM\OneToMany(targetEntity="Photo" , fetch="EAGER", mappedBy="galerie")
      */
@@ -99,5 +106,45 @@ class Galerie
     {
         return $this->image;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add photo
+     *
+     * @param \ObsessionMainBundle\Entity\Photo $photo
+     *
+     * @return Galerie
+     */
+    public function addPhoto(\ObsessionMainBundle\Entity\Photo $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \ObsessionMainBundle\Entity\Photo $photo
+     */
+    public function removePhoto(\ObsessionMainBundle\Entity\Photo $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+}

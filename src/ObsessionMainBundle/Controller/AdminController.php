@@ -17,6 +17,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -101,6 +102,7 @@ class AdminController extends Controller
         $form=$this->createForm('ObsessionMainBundle\Form\GalerieType',$galerie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
+            $this->copieMusique($galerie);
             $this->copieCouvertureGalerie($galerie);
             $this->copiePhotosGalerie($galerie,$_FILES['file']['tmp_name']);
             return $this->redirectToRoute('adminGalerie');
@@ -130,6 +132,20 @@ class AdminController extends Controller
         ));
     }
 
+    private function copieMusique(Galerie $galerie){
+        $format=explode(".",$galerie->getMusique()->getClientOriginalName())[1];
+        $com=explode(" ",$galerie->getNom());
+        $nom='';
+        foreach ($com as $comm){
+            $nom=$nom.$comm."_";
+        }
+        $nom=substr($nom, 0, -1);
+        $nom=$nom.'.'.$format;
+        $url="bundles/obsessionmain/music/";
+        $galerie->getMusique()->move($url,$nom);
+        $galerie->setMusique($nom);
+    }
+
     /**
      * @Route("/galerieSup/{galerie}",name="supGalerie")
      * @Method({"GET", "POST"})
@@ -139,7 +155,9 @@ class AdminController extends Controller
 
         $urlHD="bundles/obsessionmain/img/photosGalerie/HD/";
         $urlMiniature="bundles/obsessionmain/img/photosGalerie/miniature/";
+        $url="bundles/obsessionmain/music/";
         $em=$this->getDoctrine()->getManager();
+        unlink($url.$galerie->getMusique());
         foreach ($galerie->getPhotos() as $photo){
             unlink($urlHD.$photo->getChemin());
             unlink($urlMiniature.$photo->getChemin());

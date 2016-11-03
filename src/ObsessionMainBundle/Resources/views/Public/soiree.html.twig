@@ -6,7 +6,7 @@
 
 {% block page %}
     {% for moi in mois %}
-        <div class="calendrier"">
+        <div class="calendrier">
             <p class="center"><img src="{{ asset(moi.url) }}" width="80%"></p>
             <div class="date">
                 <p class="textCalendrier"></p>
@@ -26,16 +26,30 @@
             </div>
         </div>
     {% endfor %}
-        <div class="wrap" style="float: left">
-            <h2>&nbsp;</h2>
-            <div class="frame" id="basic" >
-                <ul class="clearfix">
+    <h1>&nbsp;</h1>
+    <h3>&nbsp;</h3>
+        <div style="width: 50px;margin: auto;	visibility: hidden" class="up">
+            <a class="glyphicon glyphicon-chevron-up btnUp" style="color: #ffffff;font-size: 35px;text-decoration: none"></a>
+        </div>
+    <p class="centerSansMarge" >
+        <img class="barSeparation" style="margin-bottom: -28px" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="1px"/>
+    </p>
+        <div class="wrap" style="float: left;">
+            <div class="frame" id="basic">
+                <ul class="clearfix" id="affs">
                     {% for affiche in affiches %}
                         <li><a class="group2 affiches" href="{{ url~"/HD/"~affiche.chemin }}" title="{{ affiche.commentaire }}"><img class="affiche"  src="{{ url~"/miniature/"~affiche.chemin }}" height="89%"></a></li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
+    <p class="centerSansMarge" >
+        <img class="barSeparation" style="margin-top: -20px" src="{{ asset('bundles/obsessionmain/img/BarsSeparation.png') }}" width="100%" height="1px"/>
+    </p>
+    <div style="width: 50px;margin: auto;	visibility: hidden" class="down">
+        <a class="glyphicon glyphicon-chevron-down btnDown" style="color: #ffffff;font-size: 35px;margin-top: 0px;text-decoration: none"></a>
+    </div>
+
 
     <div class="modal fade" id="afficheModal" >
         <div class="modal-dialog" role="document">
@@ -69,13 +83,98 @@
     {{ parent() }}
     <script>
         $(document).ready(function(){
+            var page=0;
+            var nbAff=0;
+            var nbPage=0;
+            var nbAffParPage=0;
+
             $(".affiches").on('click',function (e) {
                 e.preventDefault();
                 $('#titreAffiche')[0].innerHTML=e.target.parentElement.title;
                 var url=e.target.parentElement.href;
                 $('#contenu')[0].innerHTML='<p style="text-align:center"><img src="'+url+'" class="img-responsive" style="border:4px solid #eeeeee;margin 20px"/></p>';
                 $('#afficheModal').modal("show");
-            })
+            });
+
+            function initVar()
+            {
+                taille=$("#affs")[0].children[0].children[0].offsetTop;
+                surplu=0;
+                nb=0;
+
+                for(var i=0;i<$("#affs")[0].children.length;i++){
+                    $("#affs")[0].children[i].children[0].style.display="";
+                    if($("#affs")[0].children[i].children[0].offsetTop != taille){
+                        surplu=surplu+1;
+                    }else{
+                        nb=nb+1;
+                    }
+                }
+                page=0;
+                nbAffParPage=nb;
+                $('.up')[0].style.visibility="hidden";
+                if(surplu>0){
+                    $('.down')[0].style.visibility="visible";
+                }else{
+                    $('.down')[0].style.visibility="hidden";
+                }
+                nbAff=$("#affs")[0].children.length;
+                nbPage=nbAff/nbAffParPage;
+
+            }
+
+            $(window).resize(function(){
+                initVar();
+            });
+            initVar();
+
+            $(".btnDown").on('click',function (e) {
+                if(nbPage-page>1){
+                    for(var i=page*nbAffParPage;i<nbAffParPage*(page+1);i++){
+                        $("#affs")[0].children[i].children[0].style.display="none";
+                    }
+                    for(var j=(page+1)*nbAffParPage;j<nbAffParPage*(page+2);j++){
+                        if( typeof $("#affs")[0].children[j] != 'undefined'){
+                            $("#affs")[0].children[j].children[0].style.display="";
+                        }
+                    }
+                    $('.up')[0].style.visibility="visible";
+                    page=page+1;
+                    if(nbPage-page<1){
+                        $('.down')[0].style.visibility="hidden";
+                    }
+                }else{
+                    $('.down')[0].style.visibility="hidden";
+                }
+
+            });
+
+            $(".btnUp").on('click',function (e) {
+                if(page>0){
+                    for(var i=page*nbAffParPage;i<nbAffParPage*(page+1);i++){
+                        if( typeof $("#affs")[0].children[i] != 'undefined') {
+                            $("#affs")[0].children[i].children[0].style.display = "none";
+                        }
+                    }
+                    for(var j=(page-1)*nbAffParPage;j<nbAffParPage*(page);j++){
+                        if( typeof $("#affs")[0].children[j] != 'undefined'){
+                            $("#affs")[0].children[j].children[0].style.display="";
+                        }
+                    }
+                    $('.down')[0].style.visibility="visible";
+                    page=page-1;
+                    if(page==0){
+                        $('.up')[0].style.visibility="hidden";
+                    }
+                }else{
+                    $('.up')[0].style.visibility="hidden";
+                }
+
+            });
+
+
+
+
         });
     </script>
     <script src="{{ asset('bundles/obsessionmain/js/affiche.js') }}"></script>

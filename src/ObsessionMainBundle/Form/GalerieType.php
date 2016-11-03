@@ -26,6 +26,12 @@ class GalerieType extends AbstractType
                     
                 )
             ))
+            ->add('musique','file',array(
+                'label'=>"Musique de fond",
+                'attr'=>array(
+                    'accept'=>"audio/mp3"
+                )
+            ))
         ;
     }
     

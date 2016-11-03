@@ -36,6 +36,13 @@ class Galerie
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="musique", type="string", length=255)
+     */
+    private $musique;
+
+    /**
      *
      * @ORM\OneToMany(targetEntity="Photo" , fetch="EAGER", mappedBy="galerie")
      */
@@ -139,5 +146,29 @@ class Galerie
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set musique
+     *
+     * @param string $musique
+     *
+     * @return Galerie
+     */
+    public function setMusique($musique)
+    {
+        $this->musique = $musique;
+
+        return $this;
+    }
+
+    /**
+     * Get musique
+     *
+     * @return string
+     */
+    public function getMusique()
+    {
+        return $this->musique;
     }
 }
