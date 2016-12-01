@@ -17,8 +17,8 @@
                 <iframe class="iframeVideo" src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             {% for image in images %}
-                <div class="item">
-                    <img src="{{"bundles/obsessionmain/img/images-accueil/" ~ image.chemin }}">
+                <div class="item" style="text-align: center">
+                    <p style="margin:0;padding:0"><img src="{{"bundles/obsessionmain/img/images-accueil/" ~ image.chemin }}"></p>
                 </div>
             {% endfor %}
         </div>
