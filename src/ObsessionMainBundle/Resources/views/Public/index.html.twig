@@ -5,11 +5,31 @@
 {% endblock %}
 
 {% block page %}
-    <div style="margin: 0px 70px 0px 70px"  >
-        {#<iframe class="video" src="https://www.youtube.com/embed/zC0keHO5hlk" frameborder="0" allowfullscreen></iframe>#}
-        <p style="text-align: center">
-            <iframe class="iframeVideo" src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </p>
+    {#<div style="margin: 0px 70px 0px 70px"  >#}
+        {#<p style="text-align: center">#}
+            {#<iframe class="iframeVideo" src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>#}
+        {#</p>#}
+    {#</div>#}
+    <div id="myCarousel" class="carousel slide" style="width: 100%;margin: auto">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active" style="text-align: center">
+                <iframe class="iframeVideo" src="https://player.vimeo.com/video/174940429?autoplay=1&loop=1&automute=1&quality=1080p"  frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;width:900px;position:relative;height: 376px;top:0px;left:0px;right:0px;bottom:0px" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            {% for image in images %}
+                <div class="item">
+                    <img src="{{"bundles/obsessionmain/img/images-accueil/" ~ image.chemin }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" style="background: none;top:auto;bottom: 50%"  href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a class="right carousel-control" style="background: none;top:auto;bottom: 50%" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"  aria-hidden="true"></span>
+        </a>
     </div>
     <div style="width: 90%;margin: auto">
         <p class="centerSansMarge">
@@ -119,6 +139,10 @@
             var url="{{ path('ajax_soirees') }}";
             var pointeur=0;
 
+            $('.carousel').carousel({
+                interval: false
+            });
+
             function ChangerDate(){
                 $('#Date')[0].innerHTML=soirees[pointeur];
                 pointeur=(pointeur+1)%soirees.length;
@@ -152,23 +176,28 @@
 
 
             var width = $(window).width();
+            console.log( $('.right'));
 
             function tailleVideo() {
                     width = $(this).width();
                     if (width < 1200) {
                         if (width > 979) {
-                            $('.iframeVideo')[0].style.height = '337px';
+                            $('.right')[0].style.right='-80px';
+                            $('.left')[0].style.left='-80px';
+                            $('.iframeVideo')[0].style.height = '376px';
                         }else{
                             if(width>737){
-                                $('.iframeVideo')[0].style.height = '245px';
+                                $('.iframeVideo')[0].style.height = '305px';
                             }else{
-                                $('.iframeVideo')[0].style.height =(width*(0.390909)-48.855).toString()+'px' ;
+                                $('.iframeVideo')[0].style.height =(width*(0.43)-22.855).toString()+'px' ;
                             }
                         }
                     }else{
                         $('.iframeVideo')[0].style.height = '376px';
+                        $('.right')[0].style.right='0px';
+                        $('.left')[0].style.left='0px';
                     }
-            }
+            };
 
 
             $(window).resize(function(){

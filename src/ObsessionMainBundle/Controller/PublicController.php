@@ -21,9 +21,10 @@ class PublicController extends Controller
      */
     public function indexAction()
     {
-
+        $images=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:ImageAccueil')->findAll();
         return $this->render('ObsessionMainBundle:Public:index.html.twig', array(
-            'adresse'=>$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Adresse')->findOneBy(array('id'=>1))
+            'adresse'=>$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Adresse')->findOneBy(array('id'=>1)),
+            'images'=>$images
         ));
     }
 

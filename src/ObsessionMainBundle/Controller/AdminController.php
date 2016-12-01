@@ -5,6 +5,7 @@ namespace ObsessionMainBundle\Controller;
 use ObsessionMainBundle\Business\Utils;
 use ObsessionMainBundle\Entity\Affiche;
 use ObsessionMainBundle\Entity\Galerie;
+use ObsessionMainBundle\Entity\ImageAccueil;
 use ObsessionMainBundle\Entity\Photo;
 use ObsessionMainBundle\Entity\Soiree;
 use ObsessionMainBundle\Entity\Lieu;
@@ -249,6 +250,47 @@ class AdminController extends Controller
             'form'=>$form->createView(),
             'lieux'=>$lieux,
         ));
+    }
+
+    /**
+     * @Route("/accueil",name="ajImageAccueil")
+     * @Method({"GET", "POST"})
+     */
+    public function adminAjoutImageAccueilAction(Request $request){
+        $images=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:ImageAccueil')->findAll();
+        $image=new ImageAccueil();
+
+        $form=$this->createForm('ObsessionMainBundle\Form\ImageType',$image);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $nom=$image->getChemin()->getClientOriginalName();
+            $url="bundles/obsessionmain/img/images-accueil/".$nom;
+            $this->get('image.handling')->open($image->getChemin()->getPathname())->save($url);
+            $em=$this->getDoctrine()->getManager();
+            $image->setChemin($nom);
+            $em->persist($image);
+            $em->flush();
+
+            return $this->redirectToRoute('ajImageAccueil');
+        }
+
+        return $this->render('@ObsessionMain/Admin/adminAjoutImageAccueil.html.twig',array(
+            'images'=>$images,
+            'form'=>$form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/accueilSup/{image}",name="supImageAccueil")
+     * @Method({"GET", "POST"})
+     */
+    public function adminSupImageAccueilAction(Request $request,ImageAccueil $image){
+        unlink("bundles/obsessionmain/img/images-accueil/".$image->getChemin());
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($image);
+        $em->flush();
+        return $this->redirectToRoute('ajImageAccueil');
+
     }
 
     /**

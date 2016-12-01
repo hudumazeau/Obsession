@@ -167,3 +167,42 @@ then
 
 	fi
 fi
+
+# --Images Accueil -- #
+
+nbImagesWeb=$(ls Obsession/web/bundles/obsessionmain/img/images-accueil/ | wc -l)
+nbImagesSrc=$(ls Obsession/src/ObsessionMainBundle/Resources/public/img/images-accueil/ | wc -l)
+imagesWeb=(`ls -t Obsession/web/bundles/obsessionmain/img/images-accueil/`)
+imagesSrc=(`ls -t Obsession/src/ObsessionMainBundle/Resources/public/img/images-accueil/`)
+
+if [ $nbImagesWeb != $nbImagesSrc ]
+then
+	# -- Une image à été ajoutée -- #
+	if [ $nbImagesWeb > $nbImagesSrc ]
+	then
+		i=0
+		while [ "$i" -lt "${#imagesWeb[*]}" ]
+		do
+			if [[ ! ${imagesSrc[*]} =~ "${imagesWeb[$i]}" ]]
+			then
+				cp  Obsession/web/bundles/obsessionmain/img/images-accueil/${imagesWeb[$i]} Obsession/src/ObsessionMainBundle/Resources/public/img/images-accueil/${imagesWeb[$i]}
+			fi
+			((i++))
+		done
+	fi
+
+	# -- Une image à été supprimée -- #
+	if [ $nbImagesWeb < $nbImagesSrc ]
+        then
+		j=0
+                while [ "$j" -lt "${#imagesSrc[*]}" ]
+                do
+                        if [[ ! ${imagesWeb[*]} =~ "${imagesSrc[$j]}" ]]
+                        then
+                                rm  Obsession/src/ObsessionMainBundle/Resources/public/img/images-accueil/${imagesSrc[$j]}
+                        fi
+                        ((j++))
+                done
+
+	fi
+fi
