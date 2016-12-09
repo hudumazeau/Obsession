@@ -273,6 +273,7 @@ class AdminController extends Controller
      */
     public function adminAjoutImageAccueilAction(Request $request){
         $images=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:ImageAccueil')->findAll();
+        $images=array_reverse($images);
         $image=new ImageAccueil();
 
         $form=$this->createForm('ObsessionMainBundle\Form\ImageType',$image);
