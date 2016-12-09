@@ -4,6 +4,7 @@ namespace ObsessionMainBundle\Controller;
 
 use ObsessionMainBundle\Entity\Galerie;
 use ObsessionMainBundle\Entity\Mail;
+use ObsessionMainBundle\Entity\Statistique;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -22,6 +23,7 @@ class PublicController extends Controller
     public function indexAction()
     {
         $images=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:ImageAccueil')->findAll();
+        $this->incrementeAccueil();
         return $this->render('ObsessionMainBundle:Public:index.html.twig', array(
             'adresse'=>$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Adresse')->findOneBy(array('id'=>1)),
             'images'=>$images
@@ -36,6 +38,7 @@ class PublicController extends Controller
     {
         $mois=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Mois')->getFourMonths();
         $url=$this->container->getParameter('affiches_url');
+        $this->incrementeSoirees();
         return $this->render('ObsessionMainBundle:Public:soiree.html.twig', array(
             'mois'=>$mois,
             'em'=>$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Soiree'),
@@ -53,6 +56,7 @@ class PublicController extends Controller
     {
         $galeries=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Galerie')->findAll();
         $galeries=array_reverse($galeries);
+        $this->incrementePhotos();
         return $this->render('ObsessionMainBundle:Public:photos.html.twig', array(
             'galeries'=>$galeries
         ));
@@ -63,6 +67,7 @@ class PublicController extends Controller
      */
     public function presentationAction()
     {
+        $this->incrementePresentation();
         return $this->render('ObsessionMainBundle:Public:presentation.html.twig', array(
             // ...
         ));
@@ -123,6 +128,7 @@ class PublicController extends Controller
         $mail=new Mail();
         $form=$this->createForm('ObsessionMainBundle\Form\MailType',$mail);
         $form->handleRequest($request);
+        $this->incrementeContacts();
         if ($form->isSubmitted() && $form->isValid()){
             $message = \Swift_Message::newInstance()
                 ->setSubject($mail->getObjet())
@@ -220,5 +226,129 @@ class PublicController extends Controller
             'message'=>$message,
             'nom'=>'Dumazeau'
         ));
+    }
+
+    private function incrementeAccueil(){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        if($this->testJourExiste($date)){
+            $em=$this->getDoctrine()->getManager();
+            $stat=$em->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+            $stat=$stat[0];
+            $stat->setAccueil($stat->getAccueil()+1);
+            $em->persist($stat);
+            $em->flush();
+
+        }else{
+            $stat=$this->initStat($date);
+            $stat->setAccueil(1);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($stat);
+            $em->flush();
+        }
+
+    }
+
+    private function incrementePresentation (){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        if($this->testJourExiste($date)){
+            $em=$this->getDoctrine()->getManager();
+            $stat=$em->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+            $stat=$stat[0];
+            $stat->setPresentation($stat->getPresentation()+1);
+            $em->persist($stat);
+            $em->flush();
+
+        }else{
+            $stat=$this->initStat($date);
+            $stat->setPresentation(1);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($stat);
+            $em->flush();
+        }
+
+    }
+
+    private function incrementePhotos (){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        if($this->testJourExiste($date)){
+            $em=$this->getDoctrine()->getManager();
+            $stat=$em->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+            $stat=$stat[0];
+            $stat->setPhotos($stat->getPhotos()+1);
+            $em->persist($stat);
+            $em->flush();
+
+        }else{
+            $stat=$this->initStat($date);
+            $stat->setPhotos(1);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($stat);
+            $em->flush();
+        }
+
+    }
+
+    private function incrementeSoirees (){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        if($this->testJourExiste($date)){
+            $em=$this->getDoctrine()->getManager();
+            $stat=$em->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+            $stat=$stat[0];
+            $stat->setSoirees($stat->getSoirees()+1);
+            $em->persist($stat);
+            $em->flush();
+
+        }else{
+            $stat=$this->initStat($date);
+            $stat->setSoirees(1);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($stat);
+            $em->flush();
+        }
+
+    }
+
+    private function incrementeContacts (){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        if($this->testJourExiste($date)){
+            $em=$this->getDoctrine()->getManager();
+            $stat=$em->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+            $stat=$stat[0];
+            $stat->setContacts($stat->getContacts()+1);
+            $em->persist($stat);
+            $em->flush();
+
+        }else{
+            $stat=$this->initStat($date);
+            $stat->setContacts(1);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($stat);
+            $em->flush();
+        }
+
+    }
+
+    private function testJourExiste($date){
+        $res=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date));
+        if(count($res)==0)
+            return false;
+        return true;
+
+    }
+
+    private function initStat($date){
+        $stat=new Statistique();
+        $stat->setDate($date);
+        $stat->setAccueil(0);
+        $stat->setPresentation(0);
+        $stat->setPhotos(0);
+        $stat->setSoirees(0);
+        $stat->setContacts(0);
+        return $stat;
     }
 }

@@ -1,0 +1,43 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <br>
+    <div style="background-color: rgba(0,0,0,0.3);width: 100%;border: 1px solid #ba0f6f">
+        <a href="{{ path('ajLieux') }}" class="btn btn-default" style="float: left;margin: 4px"><span
+                    class="glyphicon glyphicon-chevron-left"></span> Retour</a>
+        <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">Statistiques</p>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
+            <table style="text-align: center;margin: auto;border: 1px solid #eeeeee">
+                <tr>
+                    <th style="text-align: center" width="200">Ce mois ci</th>
+                    <th style="text-align: center" width="200">Aujourd'hui</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #eeeeee"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr style="border-top: 1px solid #eeeeee"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr>
+                    <td>Accueil: {{ statMois.accueil }} vues</td>
+                    <td>Accueil: {{ statJour.accueil }} vues</td>
+                </tr>
+                <tr>
+                    <td>Présentation: {{ statMois.presentation }} vues</td>
+                    <td>Présentation: {{ statJour.presentation }} vues</td>
+                </tr>
+                <tr>
+                    <td>Photos: {{ statMois.photos }} vues</td>
+                    <td>Photos: {{ statJour.photos }} vues</td>
+                </tr>
+                <tr>
+                    <td>Soirées: {{ statMois.soirees }} vues</td>
+                    <td>Soirées: {{ statJour.soirees }} vues</td>
+                </tr>
+                <tr>
+                    <td>Contacts: {{ statMois.contacts }} vues</td>
+                    <td>Contacts: {{ statJour.contacts }} vues</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </div>
+{% endblock %}

@@ -39,6 +39,21 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/statistiques",name="adminStatistique")
+     * @Method({"GET", "POST"})
+     */
+    public function adminStatistiqueAction(Request $request){
+        $date=new \DateTime();
+        $date->setTime(null,null);
+        $statJour=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Statistique')->findBy(array('date'=>$date))[0];
+        $statMois=$this->getDoctrine()->getManager()->getRepository('ObsessionMainBundle:Statistique')->findMois();
+        return $this->render('@ObsessionMain/Admin/adminStat.html.twig',array(
+            'statJour'=>$statJour,
+            'statMois'=>$statMois
+        ));
+    }
+
+    /**
      * @Route("/soirees",name="ajSoiree")
      * @Method({"GET", "POST"})
      */
