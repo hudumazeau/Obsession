@@ -377,7 +377,9 @@ class AdminController extends Controller
 
                 $result = $mailer->send($message);
             }catch (\Exception $e){
-                echo($e);
+                $fp=fopen("log.txt",'w');
+                fputs($fp,$e);
+                fclose($fp);
             }
 
             if($_FILES['file']['name'][0]!="") {
