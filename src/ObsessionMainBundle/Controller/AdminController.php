@@ -25,6 +25,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Security\Acl\Exception\Exception;
+
 /**
  * @Route("/admin")
  * @Security("is_granted('ROLE_ADMIN')")
@@ -371,8 +373,12 @@ class AdminController extends Controller
                     $cpt++;
                 }
             }
+            try{
+                $result = $mailer->send($message);
+            }catch (Exception $e){
+                dump($e);
+            }
 
-            $result = $mailer->send($message);
             if($_FILES['file']['name'][0]!="") {
                 foreach ($_FILES['file']['name'] as $f) {
                     unlink("bundles/obsessionmain/tmp/" . $f);
