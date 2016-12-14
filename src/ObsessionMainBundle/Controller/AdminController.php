@@ -343,6 +343,7 @@ class AdminController extends Controller
         $form=$this->createForm('ObsessionMainBundle\Form\MailType',$mail);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
+            try{
             $transport = \Swift_SmtpTransport::newInstance()
                 ->setUsername('obsessionm@hotmail.fr')->setPassword('korgm101')
                 ->setHost('smtp-mail.outlook.com')
@@ -373,10 +374,10 @@ class AdminController extends Controller
                     $cpt++;
                 }
             }
-            try{
+
                 $result = $mailer->send($message);
-            }catch (Exception $e){
-                dump($e);
+            }catch (\Exception $e){
+                var_dump($e);
             }
 
             if($_FILES['file']['name'][0]!="") {
