@@ -373,8 +373,10 @@ class AdminController extends Controller
             }
 
             $result = $mailer->send($message);
-            foreach ($_FILES['file']['name'] as $f){
-                unlink("bundles/obsessionmain/tmp/".$f);
+            if($_FILES['file']['name'][0]!="") {
+                foreach ($_FILES['file']['name'] as $f) {
+                    unlink("bundles/obsessionmain/tmp/" . $f);
+                }
             }
             if($result==1){
                 $this->get('session')->getFlashBag()->add('sucess','L\'email à été envoyé' );
