@@ -58,12 +58,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-# Swiftmailer Configuration
-swiftmailer:
-    transport: gmail
-    username:  obsession15obs@gmail.com
-    password:  H199696h
-    spool:     { type: memory }
+
 
 assetic:
         filters:

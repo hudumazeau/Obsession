@@ -1,0 +1,14 @@
+exception 'Swift_TransportException' with message 'Connection could not be established with host smtp-mail.outlook.com [Connection timed out #110]' in /home/hudumazeau/Sites/Obsession/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/hudumazeau/Sites/Obsession/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/hudumazeau/Sites/Obsession/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/hudumazeau/Sites/Obsession/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/hudumazeau/Sites/Obsession/src/ObsessionMainBundle/Controller/AdminController.php(378): Swift_Mailer->send(Object(Swift_Message))
+#4 [internal function]: ObsessionMainBundle\Controller\AdminController->adminMailAction(Object(Symfony\Component\HttpFoundation\Request))
+#5 /home/hudumazeau/Sites/Obsession/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php(144): call_user_func_array(Array, Array)
+#6 /home/hudumazeau/Sites/Obsession/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php(64): Symfony\Component\HttpKernel\HttpKernel->handleRaw(Object(Symfony\Component\HttpFoundation\Request), 1)
+#7 /home/hudumazeau/Sites/Obsession/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/DependencyInjection/ContainerAwareHttpKernel.php(69): Symfony\Component\HttpKernel\HttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#8 /home/hudumazeau/Sites/Obsession/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php(185): Symfony\Component\HttpKernel\DependencyInjection\ContainerAwareHttpKernel->handle(Object(Symfony\Component\HttpFoundation\Request), 1, true)
+#9 /home/hudumazeau/Sites/Obsession/web/app_dev.php(30): Symfony\Component\HttpKernel\Kernel->handle(Object(Symfony\Component\HttpFoundation\Request))
+#10 /home/hudumazeau/Sites/Obsession/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/router_dev.php(40): require('/home/hudumazea...')
+#11 {main}
