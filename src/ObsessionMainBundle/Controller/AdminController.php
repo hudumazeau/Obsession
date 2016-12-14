@@ -377,7 +377,7 @@ class AdminController extends Controller
 
                 $result = $mailer->send($message);
             }catch (\Exception $e){
-                var_dump($e);
+                dump($e);
             }
 
             if($_FILES['file']['name'][0]!="") {
