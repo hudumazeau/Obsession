@@ -222,6 +222,7 @@ class PublicController extends Controller
      */
     public function testAction(Request $request)
     {
+        
         $message='lala';
         return $this->render("@ObsessionMain/Public/Mail/mailConfirmation.html.twig",array(
             'message'=>$message,

@@ -162,28 +162,5 @@ class Mail
     {
         return $this->message;
     }
-
-    /**
-     * Set pj
-     *
-     * @param string $pj
-     *
-     * @return Mail
-     */
-    public function setPj($pj)
-    {
-        $this->pj = $pj;
-
-        return $this;
-    }
-
-    /**
-     * Get pj
-     *
-     * @return string
-     */
-    public function getPj()
-    {
-        return $this->pj;
-    }
 }
+

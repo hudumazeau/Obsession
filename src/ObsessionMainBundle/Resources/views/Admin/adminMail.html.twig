@@ -1,0 +1,80 @@
+{% extends '@ObsessionMain/baseObsession.html.twig' %}
+
+{% block page %}
+    <br>
+    {% for mes in app.session.flashBag.get('sucess') %}
+        <div class="alert alert-success" role="alert" style="margin: 10px">{{ mes }}</div>
+    {% endfor %}
+    {% for mes in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger" role="alert" style="margin: 10px">{{ mes }}</div>
+{% endfor %}
+    <div style="background-color: rgba(0,0,0,0.3);width: 100%;border: 1px solid #ba0f6f">
+        <a href="{{ path('indexAdmin') }}" class="btn btn-default" style="float: left;margin: 4px"><span
+                    class="glyphicon glyphicon-chevron-left"></span> Retour</a>
+        <p class="infos120" style="text-decoration: underline;font-size: large;margin-top: 10px">Mail</p>
+        <hr style="background-color: #ba0f6f;height: 1px; border: none;width: 100%;margin: 0px">
+        <br>
+        <div style="text-align: center;padding-left: 20%;padding-right: 20%;color: #eeeeee">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <label class="control-label required" >Sélectionner les photos de la soirée</label>
+            <INPUT name="file[]" type='file' multiple='multiple'  />
+            <input type="submit" class="btn btn-default visu" value="Visualiser le mail">
+            <input type="submit" class="btn btn-primary" value="Envoyer le mail">
+            {{ form_end(form) }}
+        </div>
+        <br>
+    </div>
+    <div class="modal fade" id="visumail" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <center><h4 class="modal-title">Prévisualisation du mail</h4></center>
+            </div>
+            <div class="modal-body" id="mailmail">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            var theHREF;
+
+            $("#dialog-confirm").dialog({
+                resizable: true,
+                height: 200,
+                width: 500,
+                autoOpen: false,
+                modal: true,
+
+            });
+            $('.visu').on('click',function (e) {
+                e.preventDefault();
+                var url = "{{ path('ajax_admin') }}";
+                var mes="";
+                mes=$('#mail_message')[0].value
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    cache: false,
+                    success: function (data) {
+                        var inter=data;
+                        inter=inter.replace('messageacompleter',mes);
+                        $("#mailmail")[0].innerHTML = inter;
+                    }
+
+                });
+                $("#visumail").modal('show');
+            })
+        });
+
+    </script>
+{% endblock %}

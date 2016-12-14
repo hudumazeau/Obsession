@@ -6,6 +6,7 @@ use ObsessionMainBundle\Business\Utils;
 use ObsessionMainBundle\Entity\Affiche;
 use ObsessionMainBundle\Entity\Galerie;
 use ObsessionMainBundle\Entity\ImageAccueil;
+use ObsessionMainBundle\Entity\Mail;
 use ObsessionMainBundle\Entity\Photo;
 use ObsessionMainBundle\Entity\Soiree;
 use ObsessionMainBundle\Entity\Lieu;
@@ -23,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * @Route("/admin")
  * @Security("is_granted('ROLE_ADMIN')")
@@ -330,6 +331,65 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/mail",name="mail")
+     * @Method({"GET", "POST"})
+     */
+    public function adminMailAction(Request $request){
+
+        $mail=new Mail();
+        $mail->setPj(null);
+        $form=$this->createForm('ObsessionMainBundle\Form\MailType',$mail);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $transport = \Swift_SmtpTransport::newInstance()
+                ->setUsername('obsessionm@hotmail.fr')->setPassword('korgm101')
+                ->setHost('smtp-mail.outlook.com')
+                ->setPort(587)->setEncryption('tls');
+
+            $mailer = \Swift_Mailer::newInstance($transport);
+            
+            $html=$this->renderView('@ObsessionMain/Public/Mail/mail.html.twig',array(
+                'message'=>$mail->getMessage()
+            ));
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($mail->getObjet())
+                ->setFrom(array('obsessionm@hotmail.fr' => 'Disco Mobile Obsession'))
+                ->setTo(array($mail->getMail() => $mail->getMail()))
+                ->addPart($html,'text/html')
+            ;
+
+            if($_FILES['file']['name'][0]!=""){
+                $cpt=0;
+                foreach ($_FILES['file']['name'] as $f){
+                    copy($_FILES['file']['tmp_name'][$cpt],"bundles/obsessionmain/tmp/".$f);
+                    $cpt++;
+                }
+                $cpt=0;
+                foreach ($_FILES['file']['name'] as $fic ){
+                    $message->attach(\Swift_Attachment::fromPath("bundles/obsessionmain/tmp/".$fic),"application/octet-stream");
+                    $cpt++;
+                }
+            }
+
+            $result = $mailer->send($message);
+            foreach ($_FILES['file']['name'] as $f){
+                unlink("bundles/obsessionmain/tmp/".$f);
+            }
+            if($result==1){
+                $this->get('session')->getFlashBag()->add('sucess','L\'email à été envoyé' );
+            }else{
+                $this->get('session')->getFlashBag()->add('error','L\'email n\'à pas été envoyé. Veuillez réessayer' );
+            }
+
+            return $this->redirectToRoute('mail');
+        }
+        return $this->render('@ObsessionMain/Admin/adminMail.html.twig',array(
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
      * @Route("/soireesSup/{soiree}",name="supSoiree")
      * @Method({"GET", "POST"})
      */
@@ -361,5 +421,18 @@ class AdminController extends Controller
         $urlMiniature=$this->container->getParameter('affiches_url').'/miniature/'.$affiche->getChemin();
         unlink($urlHD);
         unlink($urlMiniature);
+    }
+
+    /**
+     *
+     * @Route("/ajax_admin", name="ajax_admin")
+     * @Method("POST")
+     * @Template("@ObsessionMain/Public/Mail/mail.html.twig")
+     */
+    public function ajaxAdminAction(Request $request)
+    {
+        return array(
+            'message'=>'messageacompleter'
+        );
     }
 }
